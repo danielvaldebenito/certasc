@@ -32,25 +32,41 @@ public class CreatePDFD114
         FileName = "Inspeccion IT " + Inspeccion.IT.Replace('/', '-') + ".pdf";
         document = new Document();
         document.Info.Title = "Inspección";
-        document.DefaultPageSetup.TopMargin = "7cm";
+        document.DefaultPageSetup.TopMargin = "2cm";
         document.DefaultPageSetup.LeftMargin = "2cm";
         document.DefaultPageSetup.RightMargin = "2cm";
         DefineStyles(document);
         DefineCover(document);
-        CreateVineta();
-        DefineContentSection(document);
-        BreveIntroAndAlcance();
-        Referencias();
-        Antecedentes();
-        ImagenCabina();
-        TerminosYDefiniciones();
-        ResultadosInspeccion();
-        ObservacionesNormativasYTecnicas();
-        Conclusiones();
+        CreateFirstPage();
+        //CreateVineta();
+        //DefineContentSection(document);
+        //BreveIntroAndAlcance();
+        //Referencias();
+        //Antecedentes();
+        //ImagenCabina();
+        //TerminosYDefiniciones();
+        //ResultadosInspeccion();
+        //ObservacionesNormativasYTecnicas();
+        //Conclusiones();
         
-        DefineTableOfContents(document);
+        //DefineTableOfContents(document);
         Rendered = Rendering();
     }
+
+    public static void CreateFirstPage ()
+    {
+        var section = document.AddSection();
+        var parr = section.AddParagraph("Señores: Administración");
+        parr.Style = "FirstPage";
+        parr = section.AddParagraph(string.Format("Cliente: {0}", Inspeccion.Servicio.Cliente.Nombre));
+        parr.Style = "FirstPage";
+        parr = section.AddParagraph("Presente");
+        parr.Style = "FirstPage";
+        parr.Format.SpaceAfter = "1cm";
+        parr = section.AddParagraph(string.Format("De acuerdo con la inspección realizada el día {0} en el {1}, enviamos el informe N° {2}  con el resultado de la revisión técnica y normativa, detallando las no conformidades que deberán ser regularizadas para iniciar el proceso de certificación.", Inspeccion.FechaInspeccion.Value.ToString("dd/MM/yyyy"), Inspeccion.NombreEdificio, Inspeccion.IT));
+        parr.Style = "FirstPage";
+    }
+
     public static void DefineStyles(Document document)
     {
         // Get the predefined style Normal.
@@ -109,6 +125,14 @@ public class CreatePDFD114
         style.ParagraphFormat.SpaceBefore = "0.2cm";
         style.ParagraphFormat.SpaceAfter = "0.2cm";
 
+        // Primera Página
+        style = document.Styles.AddStyle("FirstPage", "Normal");
+        style.ParagraphFormat.Alignment = ParagraphAlignment.Justify;
+        style.ParagraphFormat.Font.Size = 11;
+        style.ParagraphFormat.SpaceBefore = "0.5cm";
+        style.ParagraphFormat.SpaceAfter = "0.2cm";
+        
+
         // Pie de fotos
         style = document.Styles.AddStyle("Pie", "Normal");
         style.ParagraphFormat.Alignment = ParagraphAlignment.Center;
@@ -166,7 +190,7 @@ public class CreatePDFD114
         paragraph = section.AddParagraph(string.Format("Fecha de Inspección {0}", Inspeccion.FechaInspeccion.Value.ToString("dd-MM-yyyy")));
         paragraph.Format.Font.Size = 11;
         paragraph.Format.Font.Bold = false;
-        paragraph.Format.SpaceAfter = "7cm";
+        paragraph.Format.SpaceAfter = "1cm";
         paragraph.Format.Alignment = ParagraphAlignment.Center;
     }
     public void CreateVineta()
@@ -211,7 +235,7 @@ public class CreatePDFD114
         row = table.AddRow();
         row.Cells[0].AddParagraph(string.Format("CARGO: {0} \n {1} {2}", Inspeccion.Usuario.Cargo, Inspeccion.Usuario.Nombre, Inspeccion.Usuario.Apellido));
         row.Cells[1].AddParagraph("Unidad Inspección de Especialidades y Transporte Vertical");
-        row.Cells[2].AddParagraph(string.Format("CARGO: {0}", Inspeccion.Aprobador == null ? string.Empty : Inspeccion.Usuario1.Cargo));
+        row.Cells[2].AddParagraph(string.Format("{0} - {1}", Inspeccion.Aprobador == null ? string.Empty : Inspeccion.Usuario1.Cargo, Inspeccion.Aprobador == null ? string.Empty: Inspeccion.Usuario1.Nombre + " " + Inspeccion.Usuario1.Apellido));
         row.Cells[3].AddParagraph(Inspeccion.Destinatario ?? string.Empty);
 
         row = table.AddRow();

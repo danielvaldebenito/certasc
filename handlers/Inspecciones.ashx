@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Drawing;
 using System.Threading;
-public class Inspecciones : IHttpHandler, IRequiresSessionState
+public class Inspecciones : IHttpHandler
 {
 
     private static readonly log4net.ILog log = log4net.LogManager.GetLogger
@@ -24,9 +24,7 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
         var serializer = new JavaScriptSerializer();
         string sidx, sord;
         int page, rows;
-        DataUser ds = (DataUser)context.Session["dataUser"];
-        if (ds == null)
-            context.Response.Redirect("certificaciondeascensores.cl");
+
         switch (action)
         {
             case "grid":
@@ -43,7 +41,9 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
                 DateTime? dHasta = null;
                 if (hasta != string.Empty)
                     dHasta = DateTime.ParseExact(hasta, "dd-MM-yyyy", null).AddDays(1);
-                data = GetInspecciones(sidx, sord, page, rows, it, dDesde, dHasta, ds);
+                string user = post.Request["user"];
+                int calificacion = int.Parse(post.Request["calificacion"]);
+                data = GetInspecciones(sidx, sord, page, rows, it, dDesde, dHasta, user, calificacion);
                 break;
             case "corregirOtF2":
                 data = CorregirOtf2(post);
@@ -103,7 +103,7 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
                 data = RemovePhoto(post);
                 break;
             case "saveCalificacion":
-                data = SaveCalificacion(post, ds);
+                data = SaveCalificacion(post);
                 break;
             case "saveObservacionTecnica":
                 data = SaveObservacionTecnica(post);
@@ -127,7 +127,7 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
                 data = DeleteInspeccion(post);
                 break;
             case "soloAprobar":
-                data = SoloAprobar(post, ds);
+                data = SoloAprobar(post);
                 break;
             case "copy":
                 data = Copy(post);
@@ -367,17 +367,20 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
 
 
     }
-    private static object SoloAprobar(HttpContext post, DataUser ds)
+    private static object SoloAprobar(HttpContext post)
     {
         try
         {
+            var usuario = post.Request["usuario"];
+
             var id = int.Parse(post.Request["id"]);
             using (var db = new CertelEntities())
             {
                 var inspeccion = db.Inspeccion.Find(id);
                 if (inspeccion == null) return new { done = false, message = "Error: Inspección no existe" };
 
-                inspeccion.Aprobador = ds.Usuario;
+                var user = new Encriptacion(usuario, false).newText;
+                inspeccion.Aprobador = user;
                 inspeccion.FechaAprobacion = DateTime.Now;
                 db.SaveChanges();
                 return new { done = true, message = "La inspección ha sido aprobada" };
@@ -453,6 +456,7 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
                             File.Delete(path + ff.URL);
                         db.Fotografias.Remove(ff);
                     });
+                    db.SaveChanges();
                     db.Cumplimiento.Remove(f);
                 });
                 var obsTecns = inspeccion.ObservacionTecnica.ToList();
@@ -465,6 +469,7 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
                             File.Delete(path + ff.URL);
                         db.FotografiaTecnica.Remove(ff);
                     });
+                    db.SaveChanges();
                     db.ObservacionTecnica.Remove(f);
                 });
                 var inspeccionNorma = inspeccion.InspeccionNorma.ToList();
@@ -473,6 +478,7 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
                 informes.ForEach(f => { db.Informe.Remove(f); });
                 var valores = inspeccion.ValoresEspecificos.ToList();
                 valores.ForEach(f => { db.ValoresEspecificos.Remove(f); });
+                db.SaveChanges();
                 db.Inspeccion.Remove(inspeccion);
 
                 db.SaveChanges();
@@ -636,10 +642,11 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
     }
 
 
-    private static object SaveCalificacion(HttpContext post, DataUser ds)
+    private static object SaveCalificacion(HttpContext post)
     {
         try
         {
+
             var inspeccionId = int.Parse(post.Request["inspeccionId"]);
             var val = int.Parse(post.Request["val"]);
             var dias = int.Parse(post.Request["dias"]);
@@ -1501,25 +1508,31 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
         }
     }
 
-    private static object GetInspecciones(string sidx, string sord, int page, int rows, string it, DateTime? desde, DateTime? hasta, DataUser ds)
+    private static object GetInspecciones(string sidx, string sord, int page, int rows, string it, DateTime? desde, DateTime? hasta, string us, int calificacion)
     {
         try
         {
             using (var db = new CertelEntities())
             {
-                var isRevisador = ds.Roles.Contains(2) || ds.Roles.Contains(3);
-                var isAprobador = ds.Roles.Contains(3);
+                var usuario = new Encriptacion(us, false).newText;
+                var user = db.Usuario.Find(usuario);
+                var roles = user.UsuarioRol.Select(s => s.Rol).ToList();
+                var isRevisador = roles.Contains(2) || roles.Contains(3);
+                var isAprobador = roles.Contains(3);
                 var defaultDate = new DateTime(2016, 01, 01);
+
                 var list = db.Inspeccion
-                                .Where(w => isRevisador ? true : w.Ingeniero == ds.Usuario)
+                                .Where(w => isRevisador ? true : w.Ingeniero == usuario)
                                 .Where(w => w.Servicio.IT.Contains(it))
+                                .Where(w => calificacion == -2 ? true
+                                    : calificacion == -1 ? w.Calificacion == null
+                                        : w.Calificacion == calificacion)
                                 .Where(w => desde == null
                                     ? true
                                     : w.FechaCreacion >= desde.Value)
                                 .Where(w => hasta == null
                                     ? true
-                                    : w.FechaCreacion <= hasta.Value)
-                                    .ToList();
+                                    : w.FechaCreacion <= hasta.Value);
                 int pageSize = rows;
                 int totalRecords = list.Count();
                 int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
@@ -1531,7 +1544,7 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
 
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize);
-                var date = new DateTime();
+                var date = DateTime.Today;
                 int revisar;
                 var grid = new
                 {
@@ -1560,13 +1573,13 @@ public class Inspecciones : IHttpHandler, IRequiresSessionState
                                Aprobar = !isAprobador || !x.FechaRevision.HasValue ? 0 : x.FechaAprobacion.HasValue ? 1 : 2,
                                Revisar1 = revisar,
                                Aprobado = x.FechaAprobacion.HasValue,
-                               Today = date = DateTime.Today,
                                AtrasadaInspeccion = date > x.FechaInspeccion && !x.Cumplimiento.Any(),
-                               AtrasadaEntrega = !x.FechaEntrega.HasValue ? false : date > x.FechaEntrega.Value,
+                               AtrasadaEntrega = !x.FechaEntrega.HasValue ? false : date > x.FechaEntrega.Value && x.EstadoID == 1,
                                Destinatario = x.Destinatario,
                                Fase1 = x.Fase,
                                Califica = x.Calificacion,
-                               HasNextFase = x.Inspeccion1.Any() || x.CreaFaseSiguiente == true
+                               HasNextFase = x.Inspeccion1.Any() || x.CreaFaseSiguiente == true,
+                               FromCotizacion = x.Servicio.CotizacionID != null
                            })
                            .ToList()
                 };

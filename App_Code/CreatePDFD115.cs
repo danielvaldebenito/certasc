@@ -211,7 +211,7 @@ public class CreatePDFD115
         row = table.AddRow();
         row.Cells[0].AddParagraph(string.Format("CARGO: {0} \n {1} {2}", Inspeccion.Usuario.Cargo, Inspeccion.Usuario.Nombre, Inspeccion.Usuario.Apellido));
         row.Cells[1].AddParagraph("Unidad Inspección de Especialidades y Transporte Vertical");
-        row.Cells[2].AddParagraph(string.Format("CARGO: {0}", Inspeccion.Aprobador == null ? string.Empty : Inspeccion.Usuario1.Cargo));
+        row.Cells[2].AddParagraph(string.Format("{0} - {1}", Inspeccion.Aprobador == null ? string.Empty : Inspeccion.Usuario1.Cargo, Inspeccion.Aprobador == null ? string.Empty : Inspeccion.Usuario1.Nombre + " " + Inspeccion.Usuario1.Apellido));
         row.Cells[3].AddParagraph(Inspeccion.Destinatario ?? string.Empty);
 
         row = table.AddRow();

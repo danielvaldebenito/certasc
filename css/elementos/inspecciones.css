@@ -131,6 +131,15 @@
                 background: #D50000;
                 color: #FFF;
             }
+        .chl-botonera > .chl-btn > button.chl-nc2 {
+            border: 1px solid #FFC107;
+            color: #FFC107;
+        }
+
+            .chl-botonera > .chl-btn > button.chl-nc2.chl-active {
+                background: #FFC107;
+                color: #FFF;
+            }
         .chl-botonera > .chl-btn > button.chl-obs{
             border: 1px solid #01579B;
             color: #01579B;

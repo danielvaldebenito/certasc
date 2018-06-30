@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Certel</title>
+    <title>Certasc</title>
     <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="css/images/favicon.ico" type="image/x-icon" />
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -31,7 +31,7 @@
             <div class="col-lg-4 col-xs-12 col-sm-6 col-md-6">
                 <div class="panel-default">
                     <div class="panel-heading">
-                        <h3>Bienvenido a Certel</h3>
+                        <h3>Bienvenido a Certasc</h3>
                     </div>
                     <div class="panel-body">
                         <form id="form-login">

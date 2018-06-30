@@ -20,6 +20,25 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ArchivoCotizacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCotizacion" Type="int" />
+          <Property Name="idArchivo" Type="int" />
+        </EntityType>
+        <EntityType Name="Archivos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URL" Type="varchar" MaxLength="100" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Extension" Type="varchar" MaxLength="50" />
+          <Property Name="Uso" Type="varchar" MaxLength="50" />
+          <Property Name="Habilitado" Type="bit" />
+        </EntityType>
         <EntityType Name="Caracteristica">
           <Key>
             <PropertyRef Name="ID" />
@@ -28,6 +47,13 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="5000" />
           <Property Name="RequisitoID" Type="int" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -40,6 +66,38 @@
           <Property Name="TelefonoContacto" Type="varchar" MaxLength="50" />
           <Property Name="EmailContacto" Type="varchar" MaxLength="50" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
+          <Property Name="Giro" Type="varchar" MaxLength="100" />
+          <Property Name="DescuentoPorc" Type="int" />
+          <Property Name="NombreContacto" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Cotizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" />
+          <Property Name="FechaDoc" Type="datetime" />
+          <Property Name="FechaSolicitud" Type="datetime" />
+          <Property Name="FuenteSolicitud" Type="varchar" MaxLength="50" />
+          <Property Name="FormaDePagoId" Type="int" />
+          <Property Name="MonedaId" Type="int" />
+          <Property Name="EstadoId" Type="int" />
+          <Property Name="Vendedor" Type="varchar" MaxLength="50" />
+          <Property Name="Observacion" Type="varchar" MaxLength="500" />
+          <Property Name="Valor" Type="float" />
+          <Property Name="Descuento" Type="float" />
+          <Property Name="Recargo" Type="float" />
+          <Property Name="Total" Type="float" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IT" Type="int" />
+          <Property Name="Filename" Type="varchar" MaxLength="100" />
+          <Property Name="Nota" Type="varchar" MaxLength="500" />
+          <Property Name="CiudadId" Type="int" />
+          <Property Name="FechaValidez" Type="datetime" />
+          <Property Name="CreadaFase2" Type="bit" />
+          <Property Name="FechaCompromisoFase2" Type="datetime" />
+          <Property Name="AlertaFase2Enviada" Type="bit" />
         </EntityType>
         <EntityType Name="Cumplimiento">
           <Key>
@@ -61,6 +119,29 @@
           <Property Name="EstructuraID" Type="int" />
           <Property Name="InspeccionID" Type="int" />
           <Property Name="Texto" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DescuentosRecargos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CotizacionId" Type="int" />
+          <Property Name="TipoOperacion" Type="int" />
+          <Property Name="TipoValor" Type="int" />
+          <Property Name="Valor" Type="int" />
+          <Property Name="Exento" Type="bit" />
+          <Property Name="Glosa" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DescuentosYRecargos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TipoOperacion" Type="varchar" MaxLength="50" />
+          <Property Name="TipoValor" Type="varchar" MaxLength="50" />
+          <Property Name="Valor" Type="int" />
+          <Property Name="Glosa" Type="varchar" MaxLength="500" />
+          <Property Name="CotizacionId" Type="int" />
         </EntityType>
         <EntityType Name="DestinoProyecto">
           <Key>
@@ -86,6 +167,13 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" />
           <Property Name="NroTable" Type="int" />
+        </EntityType>
+        <EntityType Name="EstadoCotizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="EstadoInspeccion">
           <Key>
@@ -120,6 +208,13 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
           <Property Name="Fase" Type="int" />
         </EntityType>
+        <EntityType Name="FormaDePago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="FormatoNorma">
           <Key>
             <PropertyRef Name="ID" />
@@ -142,6 +237,27 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="URL" Type="varchar" MaxLength="50" />
           <Property Name="ObservacionTecnicaID" Type="int" />
+        </EntityType>
+        <EntityType Name="GastoOperacional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoGastoId" Type="int" />
+          <Property Name="CotizacionId" Type="int" />
+          <Property Name="Valor" Type="float" />
+          <Property Name="Cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="Hito">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="TipoHitoId" Type="int" />
+          <Property Name="Observacion" Type="varchar" MaxLength="500" />
+          <Property Name="FechaCompromiso" Type="datetime" />
+          <Property Name="CotizacionId" Type="int" />
         </EntityType>
         <EntityType Name="Informe">
           <Key>
@@ -198,6 +314,56 @@
           <Property Name="InspeccionID" Type="int" />
           <Property Name="NormaID" Type="int" />
         </EntityType>
+        <EntityType Name="ItemCotizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoId" Type="int" />
+          <Property Name="DescripcionEditada" Type="varchar" MaxLength="500" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Unitario" Type="float" />
+          <Property Name="Descuento" Type="float" />
+          <Property Name="ModoDescuento" Type="varchar" MaxLength="50" />
+          <Property Name="CotizacionId" Type="int" />
+          <Property Name="Exento" Type="bit" />
+          <Property Name="AparatoID" Type="int" />
+          <Property Name="TipoFuncionamientoID" Type="int" />
+          <Property Name="AlturaPisos" Type="int" />
+          <Property Name="Uso" Type="varchar" MaxLength="50" />
+          <Property Name="MarcaID" Type="int" />
+          <Property Name="InstalacionAno" Type="int" />
+          <Property Name="EmpresaInstaladora" Type="varchar" MaxLength="100" />
+          <Property Name="Ubicacion" Type="varchar" MaxLength="100" />
+          <Property Name="ValorDescuento" Type="float" />
+        </EntityType>
+        <EntityType Name="ListaPrecio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoElevadorId" Type="int" />
+          <Property Name="Paradas" Type="int" />
+          <Property Name="MasDe1Equipo" Type="bit" />
+          <Property Name="ProductoId" Type="int" />
+          <Property Name="ValorUF" Type="float" />
+        </EntityType>
+        <EntityType Name="ListaPrecioCostosLogisticos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CiudadId" Type="int" />
+          <Property Name="TipoGastoId" Type="int" />
+          <Property Name="ValorCLP" Type="float" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="MenuAcceso">
           <Key>
             <PropertyRef Name="ID" />
@@ -216,6 +382,13 @@
           <Property Name="URL" Type="varchar" MaxLength="50" />
           <Property Name="FontAwesomeIcon" Type="varchar" MaxLength="50" />
           <Property Name="MenuModulosID" Type="int" />
+        </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Norma">
           <Key>
@@ -255,6 +428,17 @@
           <Property Name="ESN" Type="varchar" MaxLength="50" />
           <Property Name="Usuario" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="PrecioReferencia" Type="int" />
+          <Property Name="MonedaId" Type="int" />
+          <Property Name="Habilitado" Type="bit" />
+        </EntityType>
         <EntityType Name="Requisito">
           <Key>
             <PropertyRef Name="ID" />
@@ -280,6 +464,16 @@
           <Property Name="ClienteID" Type="int" Nullable="false" />
           <Property Name="IT" Type="varchar" MaxLength="50" />
           <Property Name="EstadoID" Type="int" />
+          <Property Name="CotizacionID" Type="int" />
+          <Property Name="fechaCompromiso" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Clave" />
+          </Key>
+          <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Valor" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha" Type="datetime" />
         </EntityType>
         <EntityType Name="TerminosYDefiniciones">
           <Key>
@@ -297,6 +491,22 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="TipoGasto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TipoHito">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="EstadoCotizacionId" Type="int" />
+          <Property Name="FechaCompromiso" Type="bit" />
+        </EntityType>
         <EntityType Name="TipoInforme">
           <Key>
             <PropertyRef Name="ID" />
@@ -309,6 +519,13 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TipoOperacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Titulo">
@@ -331,6 +548,11 @@
           <Property Name="Habilitado" Type="bit" />
           <Property Name="Cargo" Type="varchar" MaxLength="50" />
           <Property Name="NumeroUnico" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Firma" Type="varchar" MaxLength="1000" />
+          <Property Name="PassMail" Type="varchar" MaxLength="50" />
+          <Property Name="Fono" Type="varchar" MaxLength="50" />
+          <Property Name="Celular" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UsuarioRol">
           <Key>
@@ -349,7 +571,7 @@
           <Property Name="InspeccionID" Type="int" />
           <Property Name="Valor" Type="varchar" MaxLength="300" />
         </EntityType>
-        <Association Name="FK__Actualiza__Carac__4F7CD00D">
+        <Association Name="FK__Actualiza__Carac__534D60F1">
           <End Role="Caracteristica" Type="Self.Caracteristica" Multiplicity="0..1" />
           <End Role="ActualizacionesPendientes" Type="Self.ActualizacionesPendientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -361,7 +583,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Actualiza__PdaID__5070F446">
+        <Association Name="FK__Actualiza__PdaID__5441852A">
           <End Role="Pda" Type="Self.Pda" Multiplicity="0..1" />
           <End Role="ActualizacionesPendientes" Type="Self.ActualizacionesPendientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -370,6 +592,66 @@
             </Principal>
             <Dependent Role="ActualizacionesPendientes">
               <PropertyRef Name="PdaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ArchivosC__idArc__2CBDA3B5">
+          <End Role="Archivos" Type="Self.Archivos" Multiplicity="0..1" />
+          <End Role="ArchivoCotizacion" Type="Self.ArchivoCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Archivos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArchivoCotizacion">
+              <PropertyRef Name="idArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ArchivosC__idCot__2BC97F7C">
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="0..1" />
+          <End Role="ArchivoCotizacion" Type="Self.ArchivoCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArchivoCotizacion">
+              <PropertyRef Name="idCotizacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Ciuda__2704CA5F">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="CiudadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Usuar__3A4CA8FD">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="NombreUsuario" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Vende__7B264821">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="NombreUsuario" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="Vendedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -397,18 +679,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Fotografi__Cumpl__398D8EEE">
-          <End Role="Cumplimiento" Type="Self.Cumplimiento" Multiplicity="0..1" />
-          <End Role="Fotografias" Type="Self.Fotografias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cumplimiento">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Fotografias">
-              <PropertyRef Name="CumplimientoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Fotografi__Obser__7C4F7684">
           <End Role="ObservacionTecnica" Type="Self.ObservacionTecnica" Multiplicity="0..1" />
           <End Role="FotografiaTecnica" Type="Self.FotografiaTecnica" Multiplicity="*" />
@@ -421,19 +691,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Informe__Inspecc__5DCAEF64">
-          <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="0..1" />
-          <End Role="Informe" Type="Self.Informe" Multiplicity="*" />
+        <Association Name="FK__GastoOper__Cotiz__1E6F845E">
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="0..1" />
+          <End Role="GastoOperacional" Type="Self.GastoOperacional" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Inspeccion">
-              <PropertyRef Name="ID" />
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Informe">
-              <PropertyRef Name="InspeccionID" />
+            <Dependent Role="GastoOperacional">
+              <PropertyRef Name="CotizacionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspeccio__Aprob__6D0D32F4">
+        <Association Name="FK__GastoOper__TipoG__1D7B6025">
+          <End Role="TipoGasto" Type="Self.TipoGasto" Multiplicity="0..1" />
+          <End Role="GastoOperacional" Type="Self.GastoOperacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGasto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GastoOperacional">
+              <PropertyRef Name="TipoGastoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hito__Cotizacion__540C7B00">
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="0..1" />
+          <End Role="Hito" Type="Self.Hito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hito">
+              <PropertyRef Name="CotizacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hito__TipoHitoId__531856C7">
+          <End Role="TipoHito" Type="Self.TipoHito" Multiplicity="0..1" />
+          <End Role="Hito" Type="Self.Hito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoHito">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hito">
+              <PropertyRef Name="TipoHitoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inspeccio__Aprob__5EBF139D">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -445,7 +751,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspeccio__Desti__797309D9">
+        <Association Name="FK__Inspeccio__Desti__5FB337D6">
           <End Role="DestinoProyecto" Type="Self.DestinoProyecto" Multiplicity="0..1" />
           <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -457,31 +763,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspeccio__Inspe__534D60F1">
-          <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="0..1" />
-          <End Role="InspeccionNorma" Type="Self.InspeccionNorma" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inspeccion">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="InspeccionNorma">
-              <PropertyRef Name="InspeccionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Inspeccio__Inspe__75A278F5">
-          <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="0..1" />
-          <End Role="Inspeccion1" Type="Self.Inspeccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inspeccion">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Inspeccion1">
-              <PropertyRef Name="InspeccionFase1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Inspeccio__Norma__403A8C7D">
+        <Association Name="FK__Inspeccio__Norma__693CA210">
           <End Role="Norma" Type="Self.Norma" Multiplicity="0..1" />
           <End Role="InspeccionNorma" Type="Self.InspeccionNorma" Multiplicity="*" />
           <ReferentialConstraint>
@@ -493,7 +775,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspeccio__Revis__6C190EBB">
+        <Association Name="FK__Inspeccio__Revis__619B8048">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -505,7 +787,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspeccio__TipoI__73BA3083">
+        <Association Name="FK__Inspeccio__TipoI__628FA481">
           <End Role="TipoInforme" Type="Self.TipoInforme" Multiplicity="0..1" />
           <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -517,7 +799,115 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Norma__TipoInfor__74AE54BC">
+        <Association Name="FK__ItemCotiz__Apara__65F62111">
+          <End Role="Aparato" Type="Self.Aparato" Multiplicity="0..1" />
+          <End Role="ItemCotizacion" Type="Self.ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="AparatoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__Apara__67DE6983">
+          <End Role="Aparato" Type="Self.Aparato" Multiplicity="0..1" />
+          <End Role="ItemCotizacion" Type="Self.ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="AparatoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__Apara__69C6B1F5">
+          <End Role="Aparato" Type="Self.Aparato" Multiplicity="0..1" />
+          <End Role="ItemCotizacion" Type="Self.ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="AparatoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__Marca__6CA31EA0">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="0..1" />
+          <End Role="ItemCotizacion" Type="Self.ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="MarcaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__TipoF__6ABAD62E">
+          <End Role="TipoFuncionamientoAparato" Type="Self.TipoFuncionamientoAparato" Multiplicity="0..1" />
+          <End Role="ItemCotizacion" Type="Self.ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFuncionamientoAparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="TipoFuncionamientoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaPrec__Ciuda__251C81ED">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="ListaPrecioCostosLogisticos" Type="Self.ListaPrecioCostosLogisticos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaPrecioCostosLogisticos">
+              <PropertyRef Name="CiudadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaPrec__Produ__28ED12D1">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="ListaPrecio" Type="Self.ListaPrecio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaPrecio">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaPrec__TipoE__27F8EE98">
+          <End Role="Aparato" Type="Self.Aparato" Multiplicity="0..1" />
+          <End Role="ListaPrecio" Type="Self.ListaPrecio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ListaPrecio">
+              <PropertyRef Name="TipoElevadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaPrec__TipoG__2610A626">
+          <End Role="TipoGasto" Type="Self.TipoGasto" Multiplicity="0..1" />
+          <End Role="ListaPrecioCostosLogisticos" Type="Self.ListaPrecioCostosLogisticos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGasto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaPrecioCostosLogisticos">
+              <PropertyRef Name="TipoGastoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Norma__TipoInfor__6D0D32F4">
           <End Role="TipoInforme" Type="Self.TipoInforme" Multiplicity="0..1" />
           <End Role="Norma" Type="Self.Norma" Multiplicity="*" />
           <ReferentialConstraint>
@@ -529,7 +919,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NormasAso__Norma__03F0984C">
+        <Association Name="FK__NormasAso__Norma__6EF57B66">
           <End Role="Norma" Type="Self.Norma" Multiplicity="0..1" />
           <End Role="NormasAsociadas" Type="Self.NormasAsociadas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -541,7 +931,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NormasAso__Norma__04E4BC85">
+        <Association Name="FK__NormasAso__Norma__6FE99F9F">
           <End Role="Norma" Type="Self.Norma" Multiplicity="0..1" />
           <End Role="NormasAsociadas" Type="Self.NormasAsociadas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -553,19 +943,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Observaci__Inspe__160F4887">
-          <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="0..1" />
-          <End Role="ObservacionTecnica" Type="Self.ObservacionTecnica" Multiplicity="*" />
+        <Association Name="FK__Servicio__Cotiza__0697FACD">
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="0..1" />
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Inspeccion">
-              <PropertyRef Name="ID" />
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ObservacionTecnica">
-              <PropertyRef Name="InspeccionID" />
+            <Dependent Role="Servicio">
+              <PropertyRef Name="CotizacionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TerminosY__Norma__7D439ABD">
+        <Association Name="FK__TerminosY__Norma__75A278F5">
           <End Role="Norma" Type="Self.Norma" Multiplicity="0..1" />
           <End Role="TerminosYDefiniciones" Type="Self.TerminosYDefiniciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -577,7 +967,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ValoresEs__Espec__4BAC3F29">
+        <Association Name="FK__TipoHito__Estado__51300E55">
+          <End Role="EstadoCotizacion" Type="Self.EstadoCotizacion" Multiplicity="0..1" />
+          <End Role="TipoHito" Type="Self.TipoHito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoHito">
+              <PropertyRef Name="EstadoCotizacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ValoresEs__Espec__797309D9">
           <End Role="Especificos" Type="Self.Especificos" Multiplicity="0..1" />
           <End Role="ValoresEspecificos" Type="Self.ValoresEspecificos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -586,18 +988,6 @@
             </Principal>
             <Dependent Role="ValoresEspecificos">
               <PropertyRef Name="EspecificoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ValoresEs__Inspe__4CA06362">
-          <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="0..1" />
-          <End Role="ValoresEspecificos" Type="Self.ValoresEspecificos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inspeccion">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ValoresEspecificos">
-              <PropertyRef Name="InspeccionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -610,6 +1000,54 @@
             </Principal>
             <Dependent Role="Caracteristica">
               <PropertyRef Name="RequisitoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_EstadoCotizacion">
+          <End Role="EstadoCotizacion" Type="Self.EstadoCotizacion" Multiplicity="0..1" />
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_FormaDePago">
+          <End Role="FormaDePago" Type="Self.FormaDePago" Multiplicity="0..1" />
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaDePago">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="FormaDePagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Moneda">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="MonedaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -637,15 +1075,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cumplimiento_Inspeccion">
-          <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="0..1" />
-          <End Role="Cumplimiento" Type="Self.Cumplimiento" Multiplicity="*" />
+        <Association Name="FK_DescuentosRecargos_Cotizacion">
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="0..1" />
+          <End Role="DescuentosRecargos" Type="Self.DescuentosRecargos" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Inspeccion">
-              <PropertyRef Name="ID" />
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Cumplimiento">
-              <PropertyRef Name="InspeccionID" />
+            <Dependent Role="DescuentosRecargos">
+              <PropertyRef Name="CotizacionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -670,18 +1108,6 @@
             </Principal>
             <Dependent Role="Inspeccion">
               <PropertyRef Name="EstadoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Inspeccion_Servicio">
-          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
-          <End Role="Inspeccion" Type="Self.Inspeccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicio">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Inspeccion">
-              <PropertyRef Name="ServicioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -718,6 +1144,30 @@
             </Principal>
             <Dependent Role="Inspeccion">
               <PropertyRef Name="Ingeniero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemCotizacion_Cotizacion">
+          <End Role="Cotizacion" Type="Self.Cotizacion" Multiplicity="0..1" />
+          <End Role="ItemCotizacion" Type="Self.ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="CotizacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemCotizacion_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="ItemCotizacion" Type="Self.ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="ProductoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -778,6 +1228,18 @@
             </Principal>
             <Dependent Role="Pda">
               <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Moneda">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="MonedaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -856,47 +1318,87 @@
         <EntityContainer Name="CertelModelStoreContainer">
           <EntitySet Name="ActualizacionesPendientes" EntityType="Self.ActualizacionesPendientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Aparato" EntityType="Self.Aparato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArchivoCotizacion" EntityType="Self.ArchivoCotizacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Caracteristica" EntityType="Self.Caracteristica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cotizacion" EntityType="Self.Cotizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cumplimiento" EntityType="Self.Cumplimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomInforme" EntityType="Self.CustomInforme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DescuentosRecargos" EntityType="Self.DescuentosRecargos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DescuentosYRecargos" EntityType="Self.DescuentosYRecargos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinoProyecto" EntityType="Self.DestinoProyecto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquipoUtilizado" EntityType="Self.EquipoUtilizado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Especificos" EntityType="Self.Especificos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCotizacion" EntityType="Self.EstadoCotizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoInspeccion" EntityType="Self.EstadoInspeccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoServicio" EntityType="Self.EstadoServicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstructuraInfome" EntityType="Self.EstructuraInfome" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evaluacion" EntityType="Self.Evaluacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormaDePago" EntityType="Self.FormaDePago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormatoNorma" EntityType="Self.FormatoNorma" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fotografias" EntityType="Self.Fotografias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FotografiaTecnica" EntityType="Self.FotografiaTecnica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GastoOperacional" EntityType="Self.GastoOperacional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hito" EntityType="Self.Hito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Informe" EntityType="Self.Informe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inspeccion" EntityType="Self.Inspeccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InspeccionNorma" EntityType="Self.InspeccionNorma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemCotizacion" EntityType="Self.ItemCotizacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaPrecio" EntityType="Self.ListaPrecio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaPrecioCostosLogisticos" EntityType="Self.ListaPrecioCostosLogisticos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuAcceso" EntityType="Self.MenuAcceso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuModulo" EntityType="Self.MenuModulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Norma" EntityType="Self.Norma" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NormasAsociadas" EntityType="Self.NormasAsociadas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ObservacionTecnica" EntityType="Self.ObservacionTecnica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pda" EntityType="Self.Pda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requisito" EntityType="Self.Requisito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TerminosYDefiniciones" EntityType="Self.TerminosYDefiniciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoFuncionamientoAparato" EntityType="Self.TipoFuncionamientoAparato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoGasto" EntityType="Self.TipoGasto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoHito" EntityType="Self.TipoHito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoInforme" EntityType="Self.TipoInforme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoNorma" EntityType="Self.TipoNorma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoOperacion" EntityType="Self.TipoOperacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Titulo" EntityType="Self.Titulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValoresEspecificos" EntityType="Self.ValoresEspecificos" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Actualiza__Carac__4F7CD00D" Association="Self.FK__Actualiza__Carac__4F7CD00D">
+          <AssociationSet Name="FK__Actualiza__Carac__534D60F1" Association="Self.FK__Actualiza__Carac__534D60F1">
             <End Role="Caracteristica" EntitySet="Caracteristica" />
             <End Role="ActualizacionesPendientes" EntitySet="ActualizacionesPendientes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Actualiza__PdaID__5070F446" Association="Self.FK__Actualiza__PdaID__5070F446">
+          <AssociationSet Name="FK__Actualiza__PdaID__5441852A" Association="Self.FK__Actualiza__PdaID__5441852A">
             <End Role="Pda" EntitySet="Pda" />
             <End Role="ActualizacionesPendientes" EntitySet="ActualizacionesPendientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ArchivosC__idArc__2CBDA3B5" Association="Self.FK__ArchivosC__idArc__2CBDA3B5">
+            <End Role="Archivos" EntitySet="Archivos" />
+            <End Role="ArchivoCotizacion" EntitySet="ArchivoCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ArchivosC__idCot__2BC97F7C" Association="Self.FK__ArchivosC__idCot__2BC97F7C">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="ArchivoCotizacion" EntitySet="ArchivoCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Ciuda__2704CA5F" Association="Self.FK__Cotizacio__Ciuda__2704CA5F">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Usuar__3A4CA8FD" Association="Self.FK__Cotizacio__Usuar__3A4CA8FD">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Vende__7B264821" Association="Self.FK__Cotizacio__Vende__7B264821">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
           </AssociationSet>
           <AssociationSet Name="FK__CustomInf__Estru__59FA5E80" Association="Self.FK__CustomInf__Estru__59FA5E80">
             <End Role="EstructuraInfome" EntitySet="EstructuraInfome" />
@@ -906,77 +1408,129 @@
             <End Role="Inspeccion" EntitySet="Inspeccion" />
             <End Role="CustomInforme" EntitySet="CustomInforme" />
           </AssociationSet>
-          <AssociationSet Name="FK__Fotografi__Cumpl__398D8EEE" Association="Self.FK__Fotografi__Cumpl__398D8EEE">
-            <End Role="Cumplimiento" EntitySet="Cumplimiento" />
-            <End Role="Fotografias" EntitySet="Fotografias" />
-          </AssociationSet>
           <AssociationSet Name="FK__Fotografi__Obser__7C4F7684" Association="Self.FK__Fotografi__Obser__7C4F7684">
             <End Role="ObservacionTecnica" EntitySet="ObservacionTecnica" />
             <End Role="FotografiaTecnica" EntitySet="FotografiaTecnica" />
           </AssociationSet>
-          <AssociationSet Name="FK__Informe__Inspecc__5DCAEF64" Association="Self.FK__Informe__Inspecc__5DCAEF64">
-            <End Role="Inspeccion" EntitySet="Inspeccion" />
-            <End Role="Informe" EntitySet="Informe" />
+          <AssociationSet Name="FK__GastoOper__Cotiz__1E6F845E" Association="Self.FK__GastoOper__Cotiz__1E6F845E">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="GastoOperacional" EntitySet="GastoOperacional" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspeccio__Aprob__6D0D32F4" Association="Self.FK__Inspeccio__Aprob__6D0D32F4">
+          <AssociationSet Name="FK__GastoOper__TipoG__1D7B6025" Association="Self.FK__GastoOper__TipoG__1D7B6025">
+            <End Role="TipoGasto" EntitySet="TipoGasto" />
+            <End Role="GastoOperacional" EntitySet="GastoOperacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hito__Cotizacion__540C7B00" Association="Self.FK__Hito__Cotizacion__540C7B00">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="Hito" EntitySet="Hito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hito__TipoHitoId__531856C7" Association="Self.FK__Hito__TipoHitoId__531856C7">
+            <End Role="TipoHito" EntitySet="TipoHito" />
+            <End Role="Hito" EntitySet="Hito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inspeccio__Aprob__5EBF139D" Association="Self.FK__Inspeccio__Aprob__5EBF139D">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Inspeccion" EntitySet="Inspeccion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspeccio__Desti__797309D9" Association="Self.FK__Inspeccio__Desti__797309D9">
+          <AssociationSet Name="FK__Inspeccio__Desti__5FB337D6" Association="Self.FK__Inspeccio__Desti__5FB337D6">
             <End Role="DestinoProyecto" EntitySet="DestinoProyecto" />
             <End Role="Inspeccion" EntitySet="Inspeccion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspeccio__Inspe__534D60F1" Association="Self.FK__Inspeccio__Inspe__534D60F1">
-            <End Role="Inspeccion" EntitySet="Inspeccion" />
-            <End Role="InspeccionNorma" EntitySet="InspeccionNorma" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Inspeccio__Inspe__75A278F5" Association="Self.FK__Inspeccio__Inspe__75A278F5">
-            <End Role="Inspeccion" EntitySet="Inspeccion" />
-            <End Role="Inspeccion1" EntitySet="Inspeccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Inspeccio__Norma__403A8C7D" Association="Self.FK__Inspeccio__Norma__403A8C7D">
+          <AssociationSet Name="FK__Inspeccio__Norma__693CA210" Association="Self.FK__Inspeccio__Norma__693CA210">
             <End Role="Norma" EntitySet="Norma" />
             <End Role="InspeccionNorma" EntitySet="InspeccionNorma" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspeccio__Revis__6C190EBB" Association="Self.FK__Inspeccio__Revis__6C190EBB">
+          <AssociationSet Name="FK__Inspeccio__Revis__619B8048" Association="Self.FK__Inspeccio__Revis__619B8048">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Inspeccion" EntitySet="Inspeccion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspeccio__TipoI__73BA3083" Association="Self.FK__Inspeccio__TipoI__73BA3083">
+          <AssociationSet Name="FK__Inspeccio__TipoI__628FA481" Association="Self.FK__Inspeccio__TipoI__628FA481">
             <End Role="TipoInforme" EntitySet="TipoInforme" />
             <End Role="Inspeccion" EntitySet="Inspeccion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Norma__TipoInfor__74AE54BC" Association="Self.FK__Norma__TipoInfor__74AE54BC">
+          <AssociationSet Name="FK__ItemCotiz__Apara__65F62111" Association="Self.FK__ItemCotiz__Apara__65F62111">
+            <End Role="Aparato" EntitySet="Aparato" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__Apara__67DE6983" Association="Self.FK__ItemCotiz__Apara__67DE6983">
+            <End Role="Aparato" EntitySet="Aparato" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__Apara__69C6B1F5" Association="Self.FK__ItemCotiz__Apara__69C6B1F5">
+            <End Role="Aparato" EntitySet="Aparato" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__Marca__6CA31EA0" Association="Self.FK__ItemCotiz__Marca__6CA31EA0">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__TipoF__6ABAD62E" Association="Self.FK__ItemCotiz__TipoF__6ABAD62E">
+            <End Role="TipoFuncionamientoAparato" EntitySet="TipoFuncionamientoAparato" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaPrec__Ciuda__251C81ED" Association="Self.FK__ListaPrec__Ciuda__251C81ED">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="ListaPrecioCostosLogisticos" EntitySet="ListaPrecioCostosLogisticos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaPrec__Produ__28ED12D1" Association="Self.FK__ListaPrec__Produ__28ED12D1">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ListaPrecio" EntitySet="ListaPrecio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaPrec__TipoE__27F8EE98" Association="Self.FK__ListaPrec__TipoE__27F8EE98">
+            <End Role="Aparato" EntitySet="Aparato" />
+            <End Role="ListaPrecio" EntitySet="ListaPrecio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaPrec__TipoG__2610A626" Association="Self.FK__ListaPrec__TipoG__2610A626">
+            <End Role="TipoGasto" EntitySet="TipoGasto" />
+            <End Role="ListaPrecioCostosLogisticos" EntitySet="ListaPrecioCostosLogisticos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Norma__TipoInfor__6D0D32F4" Association="Self.FK__Norma__TipoInfor__6D0D32F4">
             <End Role="TipoInforme" EntitySet="TipoInforme" />
             <End Role="Norma" EntitySet="Norma" />
           </AssociationSet>
-          <AssociationSet Name="FK__NormasAso__Norma__03F0984C" Association="Self.FK__NormasAso__Norma__03F0984C">
+          <AssociationSet Name="FK__NormasAso__Norma__6EF57B66" Association="Self.FK__NormasAso__Norma__6EF57B66">
             <End Role="Norma" EntitySet="Norma" />
             <End Role="NormasAsociadas" EntitySet="NormasAsociadas" />
           </AssociationSet>
-          <AssociationSet Name="FK__NormasAso__Norma__04E4BC85" Association="Self.FK__NormasAso__Norma__04E4BC85">
+          <AssociationSet Name="FK__NormasAso__Norma__6FE99F9F" Association="Self.FK__NormasAso__Norma__6FE99F9F">
             <End Role="Norma" EntitySet="Norma" />
             <End Role="NormasAsociadas" EntitySet="NormasAsociadas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Observaci__Inspe__160F4887" Association="Self.FK__Observaci__Inspe__160F4887">
-            <End Role="Inspeccion" EntitySet="Inspeccion" />
-            <End Role="ObservacionTecnica" EntitySet="ObservacionTecnica" />
+          <AssociationSet Name="FK__Servicio__Cotiza__0697FACD" Association="Self.FK__Servicio__Cotiza__0697FACD">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="Servicio" EntitySet="Servicio" />
           </AssociationSet>
-          <AssociationSet Name="FK__TerminosY__Norma__7D439ABD" Association="Self.FK__TerminosY__Norma__7D439ABD">
+          <AssociationSet Name="FK__TerminosY__Norma__75A278F5" Association="Self.FK__TerminosY__Norma__75A278F5">
             <End Role="Norma" EntitySet="Norma" />
             <End Role="TerminosYDefiniciones" EntitySet="TerminosYDefiniciones" />
           </AssociationSet>
-          <AssociationSet Name="FK__ValoresEs__Espec__4BAC3F29" Association="Self.FK__ValoresEs__Espec__4BAC3F29">
-            <End Role="Especificos" EntitySet="Especificos" />
-            <End Role="ValoresEspecificos" EntitySet="ValoresEspecificos" />
+          <AssociationSet Name="FK__TipoHito__Estado__51300E55" Association="Self.FK__TipoHito__Estado__51300E55">
+            <End Role="EstadoCotizacion" EntitySet="EstadoCotizacion" />
+            <End Role="TipoHito" EntitySet="TipoHito" />
           </AssociationSet>
-          <AssociationSet Name="FK__ValoresEs__Inspe__4CA06362" Association="Self.FK__ValoresEs__Inspe__4CA06362">
-            <End Role="Inspeccion" EntitySet="Inspeccion" />
+          <AssociationSet Name="FK__ValoresEs__Espec__797309D9" Association="Self.FK__ValoresEs__Espec__797309D9">
+            <End Role="Especificos" EntitySet="Especificos" />
             <End Role="ValoresEspecificos" EntitySet="ValoresEspecificos" />
           </AssociationSet>
           <AssociationSet Name="FK_Caracteristica_Requisito" Association="Self.FK_Caracteristica_Requisito">
             <End Role="Requisito" EntitySet="Requisito" />
             <End Role="Caracteristica" EntitySet="Caracteristica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Cliente" Association="Self.FK_Cotizacion_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_EstadoCotizacion" Association="Self.FK_Cotizacion_EstadoCotizacion">
+            <End Role="EstadoCotizacion" EntitySet="EstadoCotizacion" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_FormaDePago" Association="Self.FK_Cotizacion_FormaDePago">
+            <End Role="FormaDePago" EntitySet="FormaDePago" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Moneda" Association="Self.FK_Cotizacion_Moneda">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Cumplimiento_Caracteristica" Association="Self.FK_Cumplimiento_Caracteristica">
             <End Role="Caracteristica" EntitySet="Caracteristica" />
@@ -986,9 +1540,9 @@
             <End Role="Evaluacion" EntitySet="Evaluacion" />
             <End Role="Cumplimiento" EntitySet="Cumplimiento" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cumplimiento_Inspeccion" Association="Self.FK_Cumplimiento_Inspeccion">
-            <End Role="Inspeccion" EntitySet="Inspeccion" />
-            <End Role="Cumplimiento" EntitySet="Cumplimiento" />
+          <AssociationSet Name="FK_DescuentosRecargos_Cotizacion" Association="Self.FK_DescuentosRecargos_Cotizacion">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="DescuentosRecargos" EntitySet="DescuentosRecargos" />
           </AssociationSet>
           <AssociationSet Name="FK_EquipoUtilizado_Usuario" Association="Self.FK_EquipoUtilizado_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -996,10 +1550,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Inspeccion_EstadoInspeccion" Association="Self.FK_Inspeccion_EstadoInspeccion">
             <End Role="EstadoInspeccion" EntitySet="EstadoInspeccion" />
-            <End Role="Inspeccion" EntitySet="Inspeccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inspeccion_Servicio" Association="Self.FK_Inspeccion_Servicio">
-            <End Role="Servicio" EntitySet="Servicio" />
             <End Role="Inspeccion" EntitySet="Inspeccion" />
           </AssociationSet>
           <AssociationSet Name="FK_Inspeccion_TipoFuncionamientoTransporte" Association="Self.FK_Inspeccion_TipoFuncionamientoTransporte">
@@ -1013,6 +1563,14 @@
           <AssociationSet Name="FK_Inspeccion_Usuario" Association="Self.FK_Inspeccion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Inspeccion" EntitySet="Inspeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemCotizacion_Cotizacion" Association="Self.FK_ItemCotizacion_Cotizacion">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemCotizacion_Producto" Association="Self.FK_ItemCotizacion_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_MenuAcceso_MenuModulo" Association="Self.FK_MenuAcceso_MenuModulo">
             <End Role="MenuModulo" EntitySet="MenuModulo" />
@@ -1033,6 +1591,10 @@
           <AssociationSet Name="FK_Pda_Usuario" Association="Self.FK_Pda_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Pda" EntitySet="Pda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Moneda" Association="Self.FK_Producto_Moneda">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
           <AssociationSet Name="FK_Requisito_Titulo" Association="Self.FK_Requisito_Titulo">
             <End Role="Titulo" EntitySet="Titulo" />
@@ -1070,6 +1632,10 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Inspeccion" Relationship="CertelModel.FK_Inspeccion_TipoTransporte" FromRole="Aparato" ToRole="Inspeccion" />
+          <NavigationProperty Name="ListaPrecio" Relationship="CertelModel.FK__ListaPrec__TipoE__27F8EE98" FromRole="Aparato" ToRole="ListaPrecio" />
+          <NavigationProperty Name="ItemCotizacion" Relationship="CertelModel.FK__ItemCotiz__Apara__65F62111" FromRole="Aparato" ToRole="ItemCotizacion" />
+          <NavigationProperty Name="ItemCotizacion1" Relationship="CertelModel.FK__ItemCotiz__Apara__67DE6983" FromRole="Aparato" ToRole="ItemCotizacion" />
+          <NavigationProperty Name="ItemCotizacion2" Relationship="CertelModel.FK__ItemCotiz__Apara__69C6B1F5" FromRole="Aparato" ToRole="ItemCotizacion" />
         </EntityType>
         <EntityType Name="Caracteristica">
           <Key>
@@ -1095,6 +1661,10 @@
           <Property Name="EmailContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Servicio" Relationship="Self.FK_Servicio_Cliente" FromRole="Cliente" ToRole="Servicio" />
+          <Property Name="Giro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DescuentoPorc" Type="Int32" />
+          <Property Name="NombreContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK_Cotizacion_Cliente" FromRole="Cliente" ToRole="Cotizacion" />
         </EntityType>
         <EntityType Name="Cumplimiento">
           <Key>
@@ -1262,6 +1832,9 @@
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Servicio_Cliente" FromRole="Servicio" ToRole="Cliente" />
           <NavigationProperty Name="EstadoServicio" Relationship="Self.FK_Servicio_EstadoServicio" FromRole="Servicio" ToRole="EstadoServicio" />
           <NavigationProperty Name="Inspeccion" Relationship="CertelModel.FK_Inspeccion_Servicio" FromRole="Servicio" ToRole="Inspeccion" />
+          <Property Name="CotizacionID" Type="Int32" />
+          <Property Name="fechaCompromiso" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK__Servicio__Cotiza__0697FACD" FromRole="Servicio" ToRole="Cotizacion" />
         </EntityType>
         <EntityType Name="TerminosYDefiniciones">
           <Key>
@@ -1280,6 +1853,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Inspeccion" Relationship="CertelModel.FK_Inspeccion_TipoFuncionamientoTransporte" FromRole="TipoFuncionamientoAparato" ToRole="Inspeccion" />
+          <NavigationProperty Name="ItemCotizacion" Relationship="CertelModel.FK__ItemCotiz__TipoF__6ABAD62E" FromRole="TipoFuncionamientoAparato" ToRole="ItemCotizacion" />
         </EntityType>
         <EntityType Name="TipoNorma">
           <Key>
@@ -1317,6 +1891,13 @@
           <NavigationProperty Name="Inspeccion1" Relationship="CertelModel.FK__Inspeccio__Aprob__6D0D32F4" FromRole="Usuario" ToRole="Inspeccion" />
           <NavigationProperty Name="Inspeccion11" Relationship="CertelModel.FK__Inspeccio__Revis__6C190EBB" FromRole="Usuario" ToRole="Inspeccion" />
           <Property Name="NumeroUnico" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Firma" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK__Cotizacio__Usuar__3A4CA8FD" FromRole="Usuario" ToRole="Cotizacion" />
+          <NavigationProperty Name="Cotizacion1" Relationship="CertelModel.FK__Cotizacio__Vende__7B264821" FromRole="Usuario" ToRole="Cotizacion" />
+          <Property Name="PassMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UsuarioRol">
           <Key>
@@ -1724,7 +2305,139 @@
             <End Role="TipoNorma" EntitySet="TipoNorma" />
             <End Role="Norma" EntitySet="Norma" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="DescuentosRecargos" EntityType="CertelModel.DescuentosRecargos" />
+          <EntitySet Name="DescuentosYRecargos" EntityType="CertelModel.DescuentosYRecargos" />
+          <EntitySet Name="EstadoCotizacion" EntityType="CertelModel.EstadoCotizacion" />
+          <EntitySet Name="FormaDePago" EntityType="CertelModel.FormaDePago" />
+          <EntitySet Name="Hito" EntityType="CertelModel.Hito" />
+          <EntitySet Name="Moneda" EntityType="CertelModel.Moneda" />
+          <EntitySet Name="Producto" EntityType="CertelModel.Producto" />
+          <EntitySet Name="TipoHito" EntityType="CertelModel.TipoHito" />
+          <EntitySet Name="TipoOperacion" EntityType="CertelModel.TipoOperacion" />
+          <AssociationSet Name="FK__TipoHito__Estado__51300E55" Association="CertelModel.FK__TipoHito__Estado__51300E55">
+            <End Role="EstadoCotizacion" EntitySet="EstadoCotizacion" />
+            <End Role="TipoHito" EntitySet="TipoHito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hito__TipoHitoId__531856C7" Association="CertelModel.FK__Hito__TipoHitoId__531856C7">
+            <End Role="TipoHito" EntitySet="TipoHito" />
+            <End Role="Hito" EntitySet="Hito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Moneda" Association="CertelModel.FK_Producto_Moneda">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <EntitySet Name="Marca" EntityType="CertelModel.Marca" />
+          <EntitySet Name="TipoGasto" EntityType="CertelModel.TipoGasto" />
+          <EntitySet Name="Settings" EntityType="CertelModel.Settings" />
+          <EntitySet Name="ListaPrecio" EntityType="CertelModel.ListaPrecio" />
+          <EntitySet Name="Ciudad" EntityType="CertelModel.Ciudad" />
+          <EntitySet Name="ListaPrecioCostosLogisticos" EntityType="CertelModel.ListaPrecioCostosLogisticos" />
+          <AssociationSet Name="FK__ListaPrec__Ciuda__251C81ED" Association="CertelModel.FK__ListaPrec__Ciuda__251C81ED">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="ListaPrecioCostosLogisticos" EntitySet="ListaPrecioCostosLogisticos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaPrec__TipoG__2610A626" Association="CertelModel.FK__ListaPrec__TipoG__2610A626">
+            <End Role="TipoGasto" EntitySet="TipoGasto" />
+            <End Role="ListaPrecioCostosLogisticos" EntitySet="ListaPrecioCostosLogisticos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaPrec__TipoE__27F8EE98" Association="CertelModel.FK__ListaPrec__TipoE__27F8EE98">
+            <End Role="Aparato" EntitySet="Aparato" />
+            <End Role="ListaPrecio" EntitySet="ListaPrecio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaPrec__Produ__28ED12D1" Association="CertelModel.FK__ListaPrec__Produ__28ED12D1">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ListaPrecio" EntitySet="ListaPrecio" />
+          </AssociationSet>
+          <EntitySet Name="ArchivoCotizacion" EntityType="CertelModel.ArchivoCotizacion" />
+          <EntitySet Name="Cotizacion" EntityType="CertelModel.Cotizacion" />
+          <EntitySet Name="GastoOperacional" EntityType="CertelModel.GastoOperacional" />
+          <EntitySet Name="ItemCotizacion" EntityType="CertelModel.ItemCotizacion" />
+          <AssociationSet Name="FK__ArchivosC__idCot__2BC97F7C" Association="CertelModel.FK__ArchivosC__idCot__2BC97F7C">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="ArchivoCotizacion" EntitySet="ArchivoCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Ciuda__2704CA5F" Association="CertelModel.FK__Cotizacio__Ciuda__2704CA5F">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Cliente" Association="CertelModel.FK_Cotizacion_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Usuar__3A4CA8FD" Association="CertelModel.FK__Cotizacio__Usuar__3A4CA8FD">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Vende__7B264821" Association="CertelModel.FK__Cotizacio__Vende__7B264821">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GastoOper__Cotiz__1E6F845E" Association="CertelModel.FK__GastoOper__Cotiz__1E6F845E">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="GastoOperacional" EntitySet="GastoOperacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hito__Cotizacion__540C7B00" Association="CertelModel.FK__Hito__Cotizacion__540C7B00">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="Hito" EntitySet="Hito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__Cotiza__0697FACD" Association="CertelModel.FK__Servicio__Cotiza__0697FACD">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_EstadoCotizacion" Association="CertelModel.FK_Cotizacion_EstadoCotizacion">
+            <End Role="EstadoCotizacion" EntitySet="EstadoCotizacion" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_FormaDePago" Association="CertelModel.FK_Cotizacion_FormaDePago">
+            <End Role="FormaDePago" EntitySet="FormaDePago" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cotizacion_Moneda" Association="CertelModel.FK_Cotizacion_Moneda">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DescuentosRecargos_Cotizacion" Association="CertelModel.FK_DescuentosRecargos_Cotizacion">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="DescuentosRecargos" EntitySet="DescuentosRecargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemCotizacion_Cotizacion" Association="CertelModel.FK_ItemCotizacion_Cotizacion">
+            <End Role="Cotizacion" EntitySet="Cotizacion" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GastoOper__TipoG__1D7B6025" Association="CertelModel.FK__GastoOper__TipoG__1D7B6025">
+            <End Role="TipoGasto" EntitySet="TipoGasto" />
+            <End Role="GastoOperacional" EntitySet="GastoOperacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemCotizacion_Producto" Association="CertelModel.FK_ItemCotizacion_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <EntitySet Name="Archivos" EntityType="CertelModel.Archivos" />
+          <AssociationSet Name="FK__ArchivosC__idArc__2CBDA3B5" Association="CertelModel.FK__ArchivosC__idArc__2CBDA3B5">
+            <End Role="Archivos" EntitySet="Archivos" />
+            <End Role="ArchivoCotizacion" EntitySet="ArchivoCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__Apara__65F62111" Association="CertelModel.FK__ItemCotiz__Apara__65F62111">
+            <End Role="Aparato" EntitySet="Aparato" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__Apara__67DE6983" Association="CertelModel.FK__ItemCotiz__Apara__67DE6983">
+            <End Role="Aparato" EntitySet="Aparato" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__Apara__69C6B1F5" Association="CertelModel.FK__ItemCotiz__Apara__69C6B1F5">
+            <End Role="Aparato" EntitySet="Aparato" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__Marca__6CA31EA0" Association="CertelModel.FK__ItemCotiz__Marca__6CA31EA0">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCotiz__TipoF__6ABAD62E" Association="CertelModel.FK__ItemCotiz__TipoF__6ABAD62E">
+            <End Role="TipoFuncionamientoAparato" EntitySet="TipoFuncionamientoAparato" />
+            <End Role="ItemCotizacion" EntitySet="ItemCotizacion" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="InspeccionNorma">
           <Key>
             <PropertyRef Name="ID" />
@@ -2201,7 +2914,602 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="DescuentosRecargos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CotizacionId" Type="Int32" />
+          <Property Name="TipoOperacion" Type="Int32" />
+          <Property Name="TipoValor" Type="Int32" />
+          <Property Name="Valor" Type="Int32" />
+          <Property Name="Exento" Type="Boolean" />
+          <Property Name="Glosa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK_DescuentosRecargos_Cotizacion" FromRole="DescuentosRecargos" ToRole="Cotizacion" />
+        </EntityType>
+        <EntityType Name="DescuentosYRecargos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TipoOperacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoValor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Int32" />
+          <Property Name="Glosa" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CotizacionId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="EstadoCotizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TipoHito" Relationship="CertelModel.FK__TipoHito__Estado__51300E55" FromRole="EstadoCotizacion" ToRole="TipoHito" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK_Cotizacion_EstadoCotizacion" FromRole="EstadoCotizacion" ToRole="Cotizacion" />
+        </EntityType>
+        <EntityType Name="FormaDePago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK_Cotizacion_FormaDePago" FromRole="FormaDePago" ToRole="Cotizacion" />
+        </EntityType>
+        <EntityType Name="Hito">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="TipoHitoId" Type="Int32" />
+          <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCompromiso" Type="DateTime" Precision="3" />
+          <Property Name="CotizacionId" Type="Int32" />
+          <NavigationProperty Name="TipoHito" Relationship="CertelModel.FK__Hito__TipoHitoId__531856C7" FromRole="Hito" ToRole="TipoHito" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK__Hito__Cotizacion__540C7B00" FromRole="Hito" ToRole="Cotizacion" />
+        </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Producto" Relationship="CertelModel.FK_Producto_Moneda" FromRole="Moneda" ToRole="Producto" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK_Cotizacion_Moneda" FromRole="Moneda" ToRole="Cotizacion" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioReferencia" Type="Int32" />
+          <Property Name="MonedaId" Type="Int32" />
+          <NavigationProperty Name="Moneda" Relationship="CertelModel.FK_Producto_Moneda" FromRole="Producto" ToRole="Moneda" />
+          <NavigationProperty Name="ListaPrecio" Relationship="CertelModel.FK__ListaPrec__Produ__28ED12D1" FromRole="Producto" ToRole="ListaPrecio" />
+          <NavigationProperty Name="ItemCotizacion" Relationship="CertelModel.FK_ItemCotizacion_Producto" FromRole="Producto" ToRole="ItemCotizacion" />
+          <Property Name="Habilitado" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TipoHito">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoCotizacionId" Type="Int32" />
+          <NavigationProperty Name="EstadoCotizacion" Relationship="CertelModel.FK__TipoHito__Estado__51300E55" FromRole="TipoHito" ToRole="EstadoCotizacion" />
+          <NavigationProperty Name="Hito" Relationship="CertelModel.FK__Hito__TipoHitoId__531856C7" FromRole="TipoHito" ToRole="Hito" />
+          <Property Name="FechaCompromiso" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TipoOperacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__TipoHito__Estado__51300E55">
+          <End Type="CertelModel.EstadoCotizacion" Role="EstadoCotizacion" Multiplicity="0..1" />
+          <End Type="CertelModel.TipoHito" Role="TipoHito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoHito">
+              <PropertyRef Name="EstadoCotizacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hito__TipoHitoId__531856C7">
+          <End Type="CertelModel.TipoHito" Role="TipoHito" Multiplicity="0..1" />
+          <End Type="CertelModel.Hito" Role="Hito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoHito">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hito">
+              <PropertyRef Name="TipoHitoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Moneda">
+          <End Type="CertelModel.Moneda" Role="Moneda" Multiplicity="0..1" />
+          <End Type="CertelModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="MonedaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ItemCotizacion" Relationship="CertelModel.FK__ItemCotiz__Marca__6CA31EA0" FromRole="Marca" ToRole="ItemCotizacion" />
+        </EntityType>
+        <EntityType Name="TipoGasto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ListaPrecioCostosLogisticos" Relationship="CertelModel.FK__ListaPrec__TipoG__2610A626" FromRole="TipoGasto" ToRole="ListaPrecioCostosLogisticos" />
+          <NavigationProperty Name="GastoOperacional" Relationship="CertelModel.FK__GastoOper__TipoG__1D7B6025" FromRole="TipoGasto" ToRole="GastoOperacional" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Clave" />
+          </Key>
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ListaPrecio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoElevadorId" Type="Int32" />
+          <Property Name="Paradas" Type="Int32" />
+          <Property Name="MasDe1Equipo" Type="Boolean" />
+          <Property Name="ProductoId" Type="Int32" />
+          <Property Name="ValorUF" Type="Double" />
+          <NavigationProperty Name="Aparato" Relationship="CertelModel.FK__ListaPrec__TipoE__27F8EE98" FromRole="ListaPrecio" ToRole="Aparato" />
+          <NavigationProperty Name="Producto" Relationship="CertelModel.FK__ListaPrec__Produ__28ED12D1" FromRole="ListaPrecio" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ListaPrecioCostosLogisticos" Relationship="CertelModel.FK__ListaPrec__Ciuda__251C81ED" FromRole="Ciudad" ToRole="ListaPrecioCostosLogisticos" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK__Cotizacio__Ciuda__2704CA5F" FromRole="Ciudad" ToRole="Cotizacion" />
+        </EntityType>
+        <EntityType Name="ListaPrecioCostosLogisticos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CiudadId" Type="Int32" />
+          <Property Name="TipoGastoId" Type="Int32" />
+          <Property Name="ValorCLP" Type="Double" />
+          <NavigationProperty Name="Ciudad" Relationship="CertelModel.FK__ListaPrec__Ciuda__251C81ED" FromRole="ListaPrecioCostosLogisticos" ToRole="Ciudad" />
+          <NavigationProperty Name="TipoGasto" Relationship="CertelModel.FK__ListaPrec__TipoG__2610A626" FromRole="ListaPrecioCostosLogisticos" ToRole="TipoGasto" />
+        </EntityType>
+        <Association Name="FK__ListaPrec__Ciuda__251C81ED">
+          <End Type="CertelModel.Ciudad" Role="Ciudad" Multiplicity="0..1" />
+          <End Type="CertelModel.ListaPrecioCostosLogisticos" Role="ListaPrecioCostosLogisticos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaPrecioCostosLogisticos">
+              <PropertyRef Name="CiudadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaPrec__TipoG__2610A626">
+          <End Type="CertelModel.TipoGasto" Role="TipoGasto" Multiplicity="0..1" />
+          <End Type="CertelModel.ListaPrecioCostosLogisticos" Role="ListaPrecioCostosLogisticos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGasto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaPrecioCostosLogisticos">
+              <PropertyRef Name="TipoGastoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaPrec__TipoE__27F8EE98">
+          <End Type="CertelModel.Aparato" Role="Aparato" Multiplicity="0..1" />
+          <End Type="CertelModel.ListaPrecio" Role="ListaPrecio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ListaPrecio">
+              <PropertyRef Name="TipoElevadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaPrec__Produ__28ED12D1">
+          <End Type="CertelModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="CertelModel.ListaPrecio" Role="ListaPrecio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaPrecio">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ArchivoCotizacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCotizacion" Type="Int32" />
+          <Property Name="idArchivo" Type="Int32" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK__ArchivosC__idCot__2BC97F7C" FromRole="ArchivoCotizacion" ToRole="Cotizacion" />
+          <NavigationProperty Name="Archivos" Relationship="CertelModel.FK__ArchivosC__idArc__2CBDA3B5" FromRole="ArchivoCotizacion" ToRole="Archivos" />
+        </EntityType>
+        <EntityType Name="Cotizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" />
+          <Property Name="FechaDoc" Type="DateTime" Precision="3" />
+          <Property Name="FechaSolicitud" Type="DateTime" Precision="3" />
+          <Property Name="FuenteSolicitud" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormaDePagoId" Type="Int32" />
+          <Property Name="MonedaId" Type="Int32" />
+          <Property Name="EstadoId" Type="Int32" />
+          <Property Name="Vendedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="Descuento" Type="Double" />
+          <Property Name="Recargo" Type="Double" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IT" Type="Int32" />
+          <Property Name="Filename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Nota" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CiudadId" Type="Int32" />
+          <NavigationProperty Name="ArchivoCotizacion" Relationship="CertelModel.FK__ArchivosC__idCot__2BC97F7C" FromRole="Cotizacion" ToRole="ArchivoCotizacion" />
+          <NavigationProperty Name="Ciudad" Relationship="CertelModel.FK__Cotizacio__Ciuda__2704CA5F" FromRole="Cotizacion" ToRole="Ciudad" />
+          <NavigationProperty Name="Cliente" Relationship="CertelModel.FK_Cotizacion_Cliente" FromRole="Cotizacion" ToRole="Cliente" />
+          <NavigationProperty Name="Usuario1" Relationship="CertelModel.FK__Cotizacio__Usuar__3A4CA8FD" FromRole="Cotizacion" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="CertelModel.FK__Cotizacio__Vende__7B264821" FromRole="Cotizacion" ToRole="Usuario" />
+          <NavigationProperty Name="GastoOperacional" Relationship="CertelModel.FK__GastoOper__Cotiz__1E6F845E" FromRole="Cotizacion" ToRole="GastoOperacional" />
+          <NavigationProperty Name="Hito" Relationship="CertelModel.FK__Hito__Cotizacion__540C7B00" FromRole="Cotizacion" ToRole="Hito" />
+          <NavigationProperty Name="Servicio" Relationship="CertelModel.FK__Servicio__Cotiza__0697FACD" FromRole="Cotizacion" ToRole="Servicio" />
+          <NavigationProperty Name="EstadoCotizacion" Relationship="CertelModel.FK_Cotizacion_EstadoCotizacion" FromRole="Cotizacion" ToRole="EstadoCotizacion" />
+          <NavigationProperty Name="FormaDePago" Relationship="CertelModel.FK_Cotizacion_FormaDePago" FromRole="Cotizacion" ToRole="FormaDePago" />
+          <NavigationProperty Name="Moneda" Relationship="CertelModel.FK_Cotizacion_Moneda" FromRole="Cotizacion" ToRole="Moneda" />
+          <NavigationProperty Name="DescuentosRecargos" Relationship="CertelModel.FK_DescuentosRecargos_Cotizacion" FromRole="Cotizacion" ToRole="DescuentosRecargos" />
+          <NavigationProperty Name="ItemCotizacion" Relationship="CertelModel.FK_ItemCotizacion_Cotizacion" FromRole="Cotizacion" ToRole="ItemCotizacion" />
+          <Property Name="FechaValidez" Type="DateTime" Precision="3" />
+          <Property Name="CreadaFase2" Type="Boolean" />
+          <Property Name="FechaCompromisoFase2" Type="DateTime" Precision="3" />
+          <Property Name="AlertaFase2Enviada" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="GastoOperacional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoGastoId" Type="Int32" />
+          <Property Name="CotizacionId" Type="Int32" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="Cantidad" Type="Int32" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK__GastoOper__Cotiz__1E6F845E" FromRole="GastoOperacional" ToRole="Cotizacion" />
+          <NavigationProperty Name="TipoGasto" Relationship="CertelModel.FK__GastoOper__TipoG__1D7B6025" FromRole="GastoOperacional" ToRole="TipoGasto" />
+        </EntityType>
+        <EntityType Name="ItemCotizacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoId" Type="Int32" />
+          <Property Name="DescripcionEditada" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Unitario" Type="Double" />
+          <Property Name="Descuento" Type="Double" />
+          <Property Name="ModoDescuento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CotizacionId" Type="Int32" />
+          <Property Name="Exento" Type="Boolean" />
+          <Property Name="AparatoID" Type="Int32" />
+          <Property Name="TipoFuncionamientoID" Type="Int32" />
+          <Property Name="AlturaPisos" Type="Int32" />
+          <Property Name="Uso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MarcaID" Type="Int32" />
+          <Property Name="InstalacionAno" Type="Int32" />
+          <Property Name="EmpresaInstaladora" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ubicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cotizacion" Relationship="CertelModel.FK_ItemCotizacion_Cotizacion" FromRole="ItemCotizacion" ToRole="Cotizacion" />
+          <NavigationProperty Name="Producto" Relationship="CertelModel.FK_ItemCotizacion_Producto" FromRole="ItemCotizacion" ToRole="Producto" />
+          <Property Name="ValorDescuento" Type="Double" />
+          <NavigationProperty Name="Aparato" Relationship="CertelModel.FK__ItemCotiz__Apara__65F62111" FromRole="ItemCotizacion" ToRole="Aparato" />
+          <NavigationProperty Name="Aparato1" Relationship="CertelModel.FK__ItemCotiz__Apara__67DE6983" FromRole="ItemCotizacion" ToRole="Aparato" />
+          <NavigationProperty Name="Aparato2" Relationship="CertelModel.FK__ItemCotiz__Apara__69C6B1F5" FromRole="ItemCotizacion" ToRole="Aparato" />
+          <NavigationProperty Name="Marca" Relationship="CertelModel.FK__ItemCotiz__Marca__6CA31EA0" FromRole="ItemCotizacion" ToRole="Marca" />
+          <NavigationProperty Name="TipoFuncionamientoAparato" Relationship="CertelModel.FK__ItemCotiz__TipoF__6ABAD62E" FromRole="ItemCotizacion" ToRole="TipoFuncionamientoAparato" />
+        </EntityType>
+        <Association Name="FK__ArchivosC__idCot__2BC97F7C">
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="0..1" />
+          <End Type="CertelModel.ArchivoCotizacion" Role="ArchivoCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArchivoCotizacion">
+              <PropertyRef Name="idCotizacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Ciuda__2704CA5F">
+          <End Type="CertelModel.Ciudad" Role="Ciudad" Multiplicity="0..1" />
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="CiudadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Cliente">
+          <End Type="CertelModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Usuar__3A4CA8FD">
+          <End Type="CertelModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="NombreUsuario" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Vende__7B264821">
+          <End Type="CertelModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="NombreUsuario" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GastoOper__Cotiz__1E6F845E">
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="0..1" />
+          <End Type="CertelModel.GastoOperacional" Role="GastoOperacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GastoOperacional">
+              <PropertyRef Name="CotizacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hito__Cotizacion__540C7B00">
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="0..1" />
+          <End Type="CertelModel.Hito" Role="Hito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hito">
+              <PropertyRef Name="CotizacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__Cotiza__0697FACD">
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="0..1" />
+          <End Type="CertelModel.Servicio" Role="Servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Servicio">
+              <PropertyRef Name="CotizacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_EstadoCotizacion">
+          <End Type="CertelModel.EstadoCotizacion" Role="EstadoCotizacion" Multiplicity="0..1" />
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_FormaDePago">
+          <End Type="CertelModel.FormaDePago" Role="FormaDePago" Multiplicity="0..1" />
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaDePago">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="FormaDePagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cotizacion_Moneda">
+          <End Type="CertelModel.Moneda" Role="Moneda" Multiplicity="0..1" />
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cotizacion">
+              <PropertyRef Name="MonedaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DescuentosRecargos_Cotizacion">
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="0..1" />
+          <End Type="CertelModel.DescuentosRecargos" Role="DescuentosRecargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DescuentosRecargos">
+              <PropertyRef Name="CotizacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemCotizacion_Cotizacion">
+          <End Type="CertelModel.Cotizacion" Role="Cotizacion" Multiplicity="0..1" />
+          <End Type="CertelModel.ItemCotizacion" Role="ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="CotizacionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GastoOper__TipoG__1D7B6025">
+          <End Type="CertelModel.TipoGasto" Role="TipoGasto" Multiplicity="0..1" />
+          <End Type="CertelModel.GastoOperacional" Role="GastoOperacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGasto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GastoOperacional">
+              <PropertyRef Name="TipoGastoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemCotizacion_Producto">
+          <End Type="CertelModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="CertelModel.ItemCotizacion" Role="ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Archivos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Uso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Habilitado" Type="Boolean" />
+          <NavigationProperty Name="ArchivoCotizacion" Relationship="CertelModel.FK__ArchivosC__idArc__2CBDA3B5" FromRole="Archivos" ToRole="ArchivoCotizacion" />
+        </EntityType>
+        <Association Name="FK__ArchivosC__idArc__2CBDA3B5">
+          <End Type="CertelModel.Archivos" Role="Archivos" Multiplicity="0..1" />
+          <End Type="CertelModel.ArchivoCotizacion" Role="ArchivoCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Archivos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArchivoCotizacion">
+              <PropertyRef Name="idArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__Apara__65F62111">
+          <End Type="CertelModel.Aparato" Role="Aparato" Multiplicity="0..1" />
+          <End Type="CertelModel.ItemCotizacion" Role="ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="AparatoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__Apara__67DE6983">
+          <End Type="CertelModel.Aparato" Role="Aparato" Multiplicity="0..1" />
+          <End Type="CertelModel.ItemCotizacion" Role="ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="AparatoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__Apara__69C6B1F5">
+          <End Type="CertelModel.Aparato" Role="Aparato" Multiplicity="0..1" />
+          <End Type="CertelModel.ItemCotizacion" Role="ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="AparatoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__Marca__6CA31EA0">
+          <End Type="CertelModel.Marca" Role="Marca" Multiplicity="0..1" />
+          <End Type="CertelModel.ItemCotizacion" Role="ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="MarcaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCotiz__TipoF__6ABAD62E">
+          <End Type="CertelModel.TipoFuncionamientoAparato" Role="TipoFuncionamientoAparato" Multiplicity="0..1" />
+          <End Type="CertelModel.ItemCotizacion" Role="ItemCotizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFuncionamientoAparato">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCotizacion">
+              <PropertyRef Name="TipoFuncionamientoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2228,6 +3536,9 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="CertelModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="DescuentoPorc" ColumnName="DescuentoPorc" />
+                <ScalarProperty Name="Giro" ColumnName="Giro" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Rut" ColumnName="Rut" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -2381,6 +3692,8 @@
           <EntitySetMapping Name="Servicio">
             <EntityTypeMapping TypeName="CertelModel.Servicio">
               <MappingFragment StoreEntitySet="Servicio">
+                <ScalarProperty Name="fechaCompromiso" ColumnName="fechaCompromiso" />
+                <ScalarProperty Name="CotizacionID" ColumnName="CotizacionID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
@@ -2427,6 +3740,11 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="CertelModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Fono" ColumnName="Fono" />
+                <ScalarProperty Name="PassMail" ColumnName="PassMail" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="NumeroUnico" ColumnName="NumeroUnico" />
                 <ScalarProperty Name="Cargo" ColumnName="Cargo" />
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
@@ -2584,6 +3902,238 @@
                 <ScalarProperty Name="NormaSecundariaID" ColumnName="NormaSecundariaID" />
                 <ScalarProperty Name="NormaPrincipalID" ColumnName="NormaPrincipalID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DescuentosRecargos">
+            <EntityTypeMapping TypeName="CertelModel.DescuentosRecargos">
+              <MappingFragment StoreEntitySet="DescuentosRecargos">
+                <ScalarProperty Name="Glosa" ColumnName="Glosa" />
+                <ScalarProperty Name="Exento" ColumnName="Exento" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="TipoValor" ColumnName="TipoValor" />
+                <ScalarProperty Name="TipoOperacion" ColumnName="TipoOperacion" />
+                <ScalarProperty Name="CotizacionId" ColumnName="CotizacionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DescuentosYRecargos">
+            <EntityTypeMapping TypeName="CertelModel.DescuentosYRecargos">
+              <MappingFragment StoreEntitySet="DescuentosYRecargos">
+                <ScalarProperty Name="CotizacionId" ColumnName="CotizacionId" />
+                <ScalarProperty Name="Glosa" ColumnName="Glosa" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="TipoValor" ColumnName="TipoValor" />
+                <ScalarProperty Name="TipoOperacion" ColumnName="TipoOperacion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCotizacion">
+            <EntityTypeMapping TypeName="CertelModel.EstadoCotizacion">
+              <MappingFragment StoreEntitySet="EstadoCotizacion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormaDePago">
+            <EntityTypeMapping TypeName="CertelModel.FormaDePago">
+              <MappingFragment StoreEntitySet="FormaDePago">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hito">
+            <EntityTypeMapping TypeName="CertelModel.Hito">
+              <MappingFragment StoreEntitySet="Hito">
+                <ScalarProperty Name="CotizacionId" ColumnName="CotizacionId" />
+                <ScalarProperty Name="FechaCompromiso" ColumnName="FechaCompromiso" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="TipoHitoId" ColumnName="TipoHitoId" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moneda">
+            <EntityTypeMapping TypeName="CertelModel.Moneda">
+              <MappingFragment StoreEntitySet="Moneda">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="CertelModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="MonedaId" ColumnName="MonedaId" />
+                <ScalarProperty Name="PrecioReferencia" ColumnName="PrecioReferencia" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoHito">
+            <EntityTypeMapping TypeName="CertelModel.TipoHito">
+              <MappingFragment StoreEntitySet="TipoHito">
+                <ScalarProperty Name="FechaCompromiso" ColumnName="FechaCompromiso" />
+                <ScalarProperty Name="EstadoCotizacionId" ColumnName="EstadoCotizacionId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoOperacion">
+            <EntityTypeMapping TypeName="CertelModel.TipoOperacion">
+              <MappingFragment StoreEntitySet="TipoOperacion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="CertelModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoGasto">
+            <EntityTypeMapping TypeName="CertelModel.TipoGasto">
+              <MappingFragment StoreEntitySet="TipoGasto">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="CertelModel.Settings">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaPrecio">
+            <EntityTypeMapping TypeName="CertelModel.ListaPrecio">
+              <MappingFragment StoreEntitySet="ListaPrecio">
+                <ScalarProperty Name="ValorUF" ColumnName="ValorUF" />
+                <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
+                <ScalarProperty Name="MasDe1Equipo" ColumnName="MasDe1Equipo" />
+                <ScalarProperty Name="Paradas" ColumnName="Paradas" />
+                <ScalarProperty Name="TipoElevadorId" ColumnName="TipoElevadorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudad">
+            <EntityTypeMapping TypeName="CertelModel.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaPrecioCostosLogisticos">
+            <EntityTypeMapping TypeName="CertelModel.ListaPrecioCostosLogisticos">
+              <MappingFragment StoreEntitySet="ListaPrecioCostosLogisticos">
+                <ScalarProperty Name="ValorCLP" ColumnName="ValorCLP" />
+                <ScalarProperty Name="TipoGastoId" ColumnName="TipoGastoId" />
+                <ScalarProperty Name="CiudadId" ColumnName="CiudadId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArchivoCotizacion">
+            <EntityTypeMapping TypeName="CertelModel.ArchivoCotizacion">
+              <MappingFragment StoreEntitySet="ArchivoCotizacion">
+                <ScalarProperty Name="idArchivo" ColumnName="idArchivo" />
+                <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cotizacion">
+            <EntityTypeMapping TypeName="CertelModel.Cotizacion">
+              <MappingFragment StoreEntitySet="Cotizacion">
+                <ScalarProperty Name="AlertaFase2Enviada" ColumnName="AlertaFase2Enviada" />
+                <ScalarProperty Name="FechaCompromisoFase2" ColumnName="FechaCompromisoFase2" />
+                <ScalarProperty Name="CreadaFase2" ColumnName="CreadaFase2" />
+                <ScalarProperty Name="FechaValidez" ColumnName="FechaValidez" />
+                <ScalarProperty Name="CiudadId" ColumnName="CiudadId" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="IT" ColumnName="IT" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Recargo" ColumnName="Recargo" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+                <ScalarProperty Name="MonedaId" ColumnName="MonedaId" />
+                <ScalarProperty Name="FormaDePagoId" ColumnName="FormaDePagoId" />
+                <ScalarProperty Name="FuenteSolicitud" ColumnName="FuenteSolicitud" />
+                <ScalarProperty Name="FechaSolicitud" ColumnName="FechaSolicitud" />
+                <ScalarProperty Name="FechaDoc" ColumnName="FechaDoc" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GastoOperacional">
+            <EntityTypeMapping TypeName="CertelModel.GastoOperacional">
+              <MappingFragment StoreEntitySet="GastoOperacional">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="CotizacionId" ColumnName="CotizacionId" />
+                <ScalarProperty Name="TipoGastoId" ColumnName="TipoGastoId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemCotizacion">
+            <EntityTypeMapping TypeName="CertelModel.ItemCotizacion">
+              <MappingFragment StoreEntitySet="ItemCotizacion">
+                <ScalarProperty Name="ValorDescuento" ColumnName="ValorDescuento" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="EmpresaInstaladora" ColumnName="EmpresaInstaladora" />
+                <ScalarProperty Name="InstalacionAno" ColumnName="InstalacionAno" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="Uso" ColumnName="Uso" />
+                <ScalarProperty Name="AlturaPisos" ColumnName="AlturaPisos" />
+                <ScalarProperty Name="TipoFuncionamientoID" ColumnName="TipoFuncionamientoID" />
+                <ScalarProperty Name="AparatoID" ColumnName="AparatoID" />
+                <ScalarProperty Name="Exento" ColumnName="Exento" />
+                <ScalarProperty Name="CotizacionId" ColumnName="CotizacionId" />
+                <ScalarProperty Name="ModoDescuento" ColumnName="ModoDescuento" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Unitario" ColumnName="Unitario" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="DescripcionEditada" ColumnName="DescripcionEditada" />
+                <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Archivos">
+            <EntityTypeMapping TypeName="CertelModel.Archivos">
+              <MappingFragment StoreEntitySet="Archivos">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Uso" ColumnName="Uso" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

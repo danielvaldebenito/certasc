@@ -79,7 +79,7 @@ public class Servicios : IHttpHandler
             var direccion = post.Request["direccion"];
             var telefono = post.Request["telefono"];
             var email = post.Request["email"];
-
+            var giro = post.Request["giro"];
             using (var db = new CertelEntities())
             {
                 var existClient = db.Cliente
@@ -94,7 +94,8 @@ public class Servicios : IHttpHandler
                         Direccion = direccion,
                         Habilitado = true,
                         EmailContacto = email,
-                        TelefonoContacto = telefono
+                        TelefonoContacto = telefono,
+                        Giro = giro
                     };
                     db.Cliente.Add(client);
                     db.SaveChanges();

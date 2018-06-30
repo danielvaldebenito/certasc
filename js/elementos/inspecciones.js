@@ -80,7 +80,10 @@ $(document).ready(function () {
             1: 'grid',
             it: $('#f_it').val(),
             desde: $('#f_desde').val(),
-            hasta: $('#f_hasta').val()
+            hasta: $('#f_hasta').val(),
+            calificacion: $('#f_calificacion').val(),
+            roles: localStorage.getItem('roles'),
+            user: localStorage.getItem('user')
         },
         mtype: "POST",
         autowidth: true,
@@ -92,8 +95,8 @@ $(document).ready(function () {
             { label: 'IT', name: 'It', index: 'IT', width: 25, align: 'center', sortable: false },
             { label: 'Elevador', name: 'Aparato', index: 'Aparato.Nombre', width: 30, align: 'center', sortable: true },
             { label: 'Funcionamiento', name: 'Funcionamiento', index: 'TipoFuncionamientoAparato.Descripcion', width: 35, align: 'center', sortable: true },
-            { label: 'F. Creación', name: 'FechaCreacion', index: 'FechaCreacion', width: 30, align: 'center', sortable: true },
-            { label: 'F. Inspección', name: 'FechaInspeccion', index: 'FechaInspeccion', width: 30, align: 'center', sortable: true },
+            { label: 'F. Creación', name: 'FechaCreacion', index: 'FechaCreacion', width: 25, align: 'center', sortable: true },
+            { label: 'F. Inspección', name: 'FechaInspeccion', index: 'FechaInspeccion', width: 25, align: 'center', sortable: true },
             { label: 'Fase', name: 'Fase', index: 'Fase', width: 10, align: 'center', sortable: true, formatter: fase },
             { label: 'Norma', name: 'Norma', index: 'Norma', width: 30, align: 'center', sortable: true },
             { label: 'Ingeniero', name: 'Ingeniero', index: 'Ingeniero', width: 30, align: 'center', sortable: true },
@@ -120,13 +123,14 @@ $(document).ready(function () {
             { label: '', name: 'Califica', hidden: true },
             { label: '', name: 'HasNextFase', hidden: true },
             { label: '', name: 'Fec', hidden: true },
-            { label: '', name: 'Fvc', hidden: true }
+            { label: '', name: 'Fvc', hidden: true },
+            { label: '', name: 'FromCotizacion', hidden: true }
             
         ],
         sortname: 'FechaCreacion',
         sortorder: 'desc',
         viewrecords: true,
-        height: 350,
+        height: 380,
         rowNum: 30,
         pager: "#pager",
         caption: 'Inspecciones registradas en el sistema',
@@ -342,11 +346,15 @@ $(document).ready(function () {
         e.preventDefault();
         jQuery("#grid")
             .setGridParam({
+                page: 1,
                 postData: {
                     1: 'grid',
                     it: $('#f_it').val(),
                     desde: $('#f_desde').val(),
-                    hasta: $('#f_hasta').val()
+                    hasta: $('#f_hasta').val(),
+                    calificacion: $('#f_calificacion').val(),
+                    roles: localStorage.getItem('roles'),
+                    user: localStorage.getItem('user')
                 },
             })
             .trigger("reloadGrid");
@@ -717,7 +725,7 @@ function openAprobacion(row)
             {
                 url: 'handlers/Inspecciones.ashx',
                 type: 'POST',
-                data: { 1: 'soloAprobar', id: row.Id },
+                data: { 1: 'soloAprobar', id: row.Id, usuario: localStorage.getItem('user') },
                 success: function (result) {
                     if (result.done)
                     {
@@ -1094,7 +1102,7 @@ function revisar(id) {
                         $.ajax({
                             url: 'handlers/SetInforme.ashx',
                             method: 'post',
-                            data: { 1: 'revisar', id: id },
+                            data: { 1: 'revisar', id: id, user: localStorage.getItem('user') },
                             success: function (result) {
                                 if (result.done) {
                                     alertify.alert('Certel', result.message, function () { });
@@ -1253,14 +1261,28 @@ function getCheckList(row)
                                                 .data('active', false)
                                                 .addClass('btn btn-default chl-nc')
                                                 .addClass(evaluacion == 3 ? 'chl-active' : '')
-                                                .prop('title', 'No Conformidad')
+                                                .prop('title', 'Defecto Grave')
                                                 .tooltip()
                                                 .append($('<i>')
                                                     .addClass('fa fa-2x fa-times-circle'))
                                                 .click(function () {
                                                     setCumplimiento(3, car.Id, row.Id, this, botonera);
                                                 })))
-
+                                        // NC
+                                        .append($('<div>')
+                                            .addClass('chl-btn')
+                                            .append($('<button>')
+                                                .data('caracteristica', car.Id)
+                                                .data('active', false)
+                                                .addClass('btn btn-default chl-nc2')
+                                                .addClass(evaluacion == 6 ? 'chl-active' : '')
+                                                .prop('title', 'Defecto Leve')
+                                                .tooltip()
+                                                .append($('<i>')
+                                                    .addClass('fa fa-2x fa-times-circle'))
+                                                .click(function () {
+                                                    setCumplimiento(3, car.Id, row.Id, this, botonera);
+                                                })))
 
                                     // Observaciones
                                         .append($('<div>')

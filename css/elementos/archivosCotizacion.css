@@ -1,0 +1,88 @@
+﻿
+.file {
+    background: #233C78;
+    color: #FFF;
+    width: 170px;
+    height: 180px;
+    border-radius: 8px;
+    font-size: 10pt;
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+    float: left;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    transition: all ease-in 0.5s;
+}
+
+    .file:hover {
+        background: #fff;
+        color: #233C78;
+        width: 172px;
+    }
+
+    .file i {
+        font-size: 48pt;
+        position: absolute;
+        bottom: 20px;
+        left: calc(50% - 24pt);
+        text-align: center;
+    }
+
+#filesPanel {
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 2px 2px 20px #AAA;
+    padding: 20px;
+    margin: 20px auto;
+    /* Flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.data-empty {
+    font-size: 20pt;
+    font-weight: 100;
+    color: #0D47A1;
+}
+
+
+
+.fileSpecial {
+    background: #88CA7B;
+    color: #FFF;
+    width: 170px;
+    height: 180px;
+    border-radius: 8px;
+    font-size: 10pt;
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+    float: left;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    transition: all ease-in 0.5s;
+}
+
+    .fileSpecial:hover {
+        background: #fff;
+        color: #5C605B;
+        width: 172px;
+    }
+
+    .fileSpecial i {
+        font-size: 48pt;
+        position: absolute;
+        bottom: 20px;
+        left: calc(50% - 24pt);
+        text-align: center;
+    }

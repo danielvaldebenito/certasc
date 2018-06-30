@@ -31,8 +31,8 @@ public class Clientes : IHttpHandler {
                 page = int.Parse(post.Request["page"]);
                 rows = int.Parse(post.Request["rows"]);
                 var name = post.Request["name"];
-
-                data = GetClientes(sidx, sord, page, rows, name);
+                var rut = post.Request["rut"];
+                data = GetClientes(sidx, sord, page, rows, name, rut);
                 break;
             case "enabledOrDisabled":
                 var id = int.Parse(post.Request["id"]);
@@ -61,6 +61,7 @@ public class Clientes : IHttpHandler {
             var direccion = post.Request["direccion"];
             var telefono = post.Request["telefono"];
             var email = post.Request["email"];
+            var giro = post.Request["giro"];
             var id = int.Parse(post.Request["id"]);
             using (var db = new CertelEntities())
             {
@@ -79,6 +80,7 @@ public class Clientes : IHttpHandler {
                 existClient.EmailContacto = email;
                 existClient.Rut = rut;
                 existClient.TelefonoContacto = telefono;
+                existClient.Giro = giro;
                 db.SaveChanges();
                 return new
                 {
@@ -120,14 +122,15 @@ public class Clientes : IHttpHandler {
 
         }
     }
-    private static object GetClientes (string sidx, string sord, int page, int rows, string name)
+    private static object GetClientes (string sidx, string sord, int page, int rows, string name, string rut)
     {
         try
         {
             using (var db = new CertelEntities())
             {
                 var list = db.Cliente
-                                .Where(w => w.Nombre.Contains(name));
+                                .Where(w => w.Nombre.Contains(name))
+                                .Where(w => w.Rut.Contains(rut));
 
                 int pageSize = rows;
                 int totalRecords = list.Count();
@@ -154,6 +157,7 @@ public class Clientes : IHttpHandler {
                                Direccion = x.Direccion == null ? string.Empty : x.Direccion.ToUpper(),
                                Telefono = x.TelefonoContacto,
                                Email = x.EmailContacto == null ? string.Empty : x.EmailContacto.ToLower(),
+                               Giro = x.Giro,
                                Enabled = x.Habilitado
                            })
                            .ToList()

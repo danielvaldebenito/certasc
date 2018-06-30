@@ -6,7 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Certel</title>
+    <title>Certasc</title>
     <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="css/images/favicon.ico" type="image/x-icon" />
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />

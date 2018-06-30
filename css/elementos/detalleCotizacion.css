@@ -1,0 +1,15 @@
+﻿.panel-detail form-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+.negrita {
+    font-weight: bold;
+}

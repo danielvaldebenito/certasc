@@ -1,14 +1,15 @@
 ﻿var SELECTED;
 $(document).ready(function () {
 
-    $('#ac_rut, #ec_rut').Rut({
+    $('#ac_rut, #ec_rut, #f_rut').Rut({
         format_on: 'keyup'
     })
     $("#grid").jqGrid({
         url: 'handlers/Clientes.ashx',
         postData: {
             1: 'grid',
-            name: $('#f_name').val()
+            name: $('#f_name').val(),
+            rut: $('#f_rut').val()
         },
         mtype: "POST",
         autowidth: true,
@@ -19,11 +20,13 @@ $(document).ready(function () {
             { label: 'Id', name: 'Id', key: true, hidden: true },
             { label: 'RUT', name: 'Rut', index: 'Rut', width: 15, align: 'left', sortable: false },
             { label: 'Nombre', name: 'Nombre', index: 'Nombre', width: 30, align: 'left', sortable: true },
+            { label: 'Giro', name: 'Giro', index: 'Giro', width: 30, align: 'left', sortable: true },
             { label: 'Dirección', name: 'Direccion', index: 'Direccion', width: 35, align: 'left', sortable: true },
             { label: 'Teléfono', name: 'Telefono', index: 'Telefono', width: 30, align: 'left', sortable: true },
             { label: 'E-mail', name: 'Email', index: 'Email', width: 30, align: 'left', sortable: true },
-            { label: 'Editar', width: 5, formatter: editButton, align: 'center' },
-            { label: 'Habilitado', name: 'Enabled', width: 5, formatter: enableButton, align: 'center' }
+            { label: 'Editar', width: 10, formatter: editButton, align: 'center' },
+            { label: 'Habilitado', name: 'Enabled', width: 10, formatter: enableButton, align: 'center' },
+            { label: 'Cotizaciones', name: '', width: 10, formatter: cotButton, align: 'center' }
         ],
         sortname: 'FechaCreacion', sortorder: 'desc',
         viewrecords: true,
@@ -35,13 +38,14 @@ $(document).ready(function () {
         onCellSelect: function (rowid, iCol, cellcontent, e) {
             var rowData = $(this).jqGrid('getRowData', rowid);
             SELECTED = rowData;
-            if(iCol == 6)
-            {
+            if(iCol == 7) {
                 openDialogEdit(rowData);
             }
-            if(iCol == 7)
-            {
+            if(iCol == 8) {
                 enableOrDisabled(rowData);
+            }
+            if (iCol == 9) {
+                window.location.href = 'handlers/ExportExcel.ashx?1=cotizacionesCliente&id=' + rowData.Id
             }
         }
     }).navGrid('#pager',
@@ -49,14 +53,23 @@ $(document).ready(function () {
                     edit: false, add: false, del: false, search: false,
                     refresh: true, view: false, position: "left", cloneToTop: false
                 });
-
+    $("#grid").navButtonAdd('#pager', {
+        caption: "Exportar",
+        title: "Exportar base de datos de clientes a Excel",
+        buttonicon: "ui-icon-document",
+        onClickButton: function () {
+            window.location.href = 'handlers/ExportExcel.ashx?1=clientes&name=' + $('#f_name').val() + '&rut=' + $('#f_rut').val()
+        },
+        position: "first"
+    });
     $('#formFiltros').submit(function (e) {
         e.preventDefault();
         jQuery("#grid")
             .setGridParam({
                 postData: {
                     1: 'grid',
-                    name: $('#f_name').val()
+                    name: $('#f_name').val(),
+                    rut: $('#f_rut').val()
                 },
             })
             .trigger("reloadGrid");
@@ -68,22 +81,6 @@ $(document).ready(function () {
         $('#formFiltros').submit();
     });
 
-    // Resize Panels
-    $(window).bind('resize', function (e) {
-
-        // grid
-        if (grid = $('.ui-jqgrid-btable:visible')) {
-            grid.each(function (index) {
-                gridId = $(this).attr('id');
-                gridParentWidth = $('#gbox_' + gridId).parent().width();
-                gridParentHeight = $('#gbox_' + gridId).parent().height();
-                $('#' + gridId).setGridWidth(gridParentWidth);
-                $('#' + gridId).setGridHeight(gridParentHeight - 100);
-            });
-        }
-
-    }).trigger('resize');
-
     // Button
     function editButton ()
     {
@@ -93,7 +90,9 @@ $(document).ready(function () {
         var color = cellvalue == true ? 'green' : 'red';
         return '<div class="btn-grid"><i class="fa fa-circle" style="color:' + color + '"></i></div>'
     }
-
+    function cotButton(cellvalue, options, rowObject) {
+        return '<div class="btn-grid"><i class="fa fa-file-excel-o" style="color:green"></i></div>'
+    }
     $('#add-client-form').submit(function (e) {
         e.preventDefault();
         var validateRut = $.Rut.validar($('#ac_rut').val());
@@ -112,6 +111,7 @@ $(document).ready(function () {
                 1: 'addClient',
                 rut: $('#ac_rut').val(),
                 nombre: $('#ac_nombre').val(),
+                giro: $('#ac_giro').val(),
                 direccion: $('#ac_direccion').val(),
                 telefono: $('#ac_telefono').val(),
                 email: $('#ac_mail').val()
@@ -148,6 +148,7 @@ $(document).ready(function () {
                 1: 'editClient',
                 rut: $('#ec_rut').val(),
                 nombre: $('#ec_nombre').val(),
+                giro: $('#ec_giro').val(),
                 direccion: $('#ec_direccion').val(),
                 telefono: $('#ec_telefono').val(),
                 email: $('#ec_mail').val(),
@@ -203,6 +204,7 @@ function openDialogEdit(rowData)
     $('#ec_telefono').val(rowData.Telefono);
     $('#ec_direccion').val(rowData.Direccion);
     $('#ec_mail').val(rowData.Email);
+    $('#ec_giro').val(rowData.Giro);
 
     $('#edit-client-dialog').dialog({
         modal: true, bgiframe: false, width: '50%', title: 'Editar Cliente', draggable: true,

@@ -24,20 +24,23 @@ public class Login : IHttpHandler, IRequiresSessionState
                 var usuario = db.Usuario
                              .Where(w => w.NombreUsuario == user)
                              .Where(w => w.Pass == encrypt.newText)
+                             .Where(w => w.Habilitado == true)
                              .FirstOrDefault();
 
                 if (usuario == null)
                     data = new { done = false, message = "Usuario y/o Contraseña inválidos" };
                 else
                 {
-                    var dataUser = new DataUser
+                    var encript = new Encriptacion(user.ToLower(), true);
+                    var dataUser = new 
                     {
-                        Usuario = user.ToLower(),
+                        Usuario = encript.newText,
                         Nombre = string.Concat(usuario.Nombre, " ", usuario.Apellido),
                         Roles = usuario.UsuarioRol.Select(s => s.Rol).ToList()
                     };
-                    context.Session["dataUser"] = dataUser;
-                    data = new { done = true, message = "ok" };
+                    //context.Session["dataUser"] = dataUser;
+                    
+                    data = new { done = true, message = "ok", user = dataUser.Usuario, name = dataUser.Nombre, roles = dataUser.Roles };
                 }
             }
 

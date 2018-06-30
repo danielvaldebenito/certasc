@@ -1,0 +1,25 @@
+﻿form .section {
+    border: 1px solid #808080;
+}
+.tab-pane {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.grid-items-resume {
+    font-size: 9pt;
+}
+
+.table caption h3 {
+    text-align: center;
+}

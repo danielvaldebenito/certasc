@@ -21,7 +21,6 @@ public class SetInforme : IHttpHandler, IRequiresSessionState {
         var serializer = new JavaScriptSerializer();
         string sidx, sord;
         int page, rows;
-        DataUser ds = (DataUser)context.Session["dataUser"];
         switch(action)
         {
             case "getPlantillaAlcance":
@@ -34,10 +33,10 @@ public class SetInforme : IHttpHandler, IRequiresSessionState {
                 data = StartPdf(post);
                 break;
             case "revisar":
-                data = Revisar(post, ds);
+                data = Revisar(post);
                 break;
             case "aprobar":
-                data = Aprobar(post, ds);
+                data = Aprobar(post);
                 break;
         }
         if (data != null)
@@ -65,7 +64,7 @@ public class SetInforme : IHttpHandler, IRequiresSessionState {
         }
     }
 
-    private static object Aprobar(HttpContext post, DataUser ds)
+    private static object Aprobar(HttpContext post)
     {
         try
         {
@@ -83,7 +82,7 @@ public class SetInforme : IHttpHandler, IRequiresSessionState {
 
                 if(inspeccion.FechaRevision == null)
                 {
-                    Revisar(post, ds);
+                    Revisar(post);
                 }
                 var fase2 = inspeccion.Inspeccion1;
                 foreach(var f in fase2)
@@ -100,11 +99,13 @@ public class SetInforme : IHttpHandler, IRequiresSessionState {
             return new { done = false, message = ex.ToString() };
         }
     }
-    private static object Revisar(HttpContext post, DataUser ds)
+    private static object Revisar(HttpContext post)
     {
         try
         {
             var id = int.Parse(post.Request["id"]);
+            var user = post.Request["user"];
+            var usuario = new Encriptacion(user, false).newText;
             using (var db = new CertelEntities())
             {
                 var inspeccion = db.Inspeccion
@@ -112,7 +113,7 @@ public class SetInforme : IHttpHandler, IRequiresSessionState {
                 if (inspeccion == null) return new { done = false, message = "Error" };
                 if(inspeccion.InspeccionNorma.Count == 0) return new { done = false, message = "No hay normas asociadas" };
                 inspeccion.FechaRevision = DateTime.Now;
-                inspeccion.Revisador = ds.Usuario;
+                inspeccion.Revisador = usuario;
                 db.SaveChanges();
                 return new { done = true, message = "Inspección ha sido revisada" };
             }

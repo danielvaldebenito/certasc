@@ -83,6 +83,56 @@
         <AssociationConnector Association="CertelModel.FK__NormasAso__Norma__03F0984C" />
         <AssociationConnector Association="CertelModel.FK__NormasAso__Norma__04E4BC85" />
         <AssociationConnector Association="CertelModel.FK_Norma_TipoNorma" />
+        <EntityTypeShape EntityType="CertelModel.DescuentosRecargos" Width="1.5" PointX="15" PointY="27.75" />
+        <EntityTypeShape EntityType="CertelModel.DescuentosYRecargos" Width="1.5" PointX="13.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CertelModel.EstadoCotizacion" Width="1.5" PointX="10.5" PointY="21.875" />
+        <EntityTypeShape EntityType="CertelModel.FormaDePago" Width="1.5" PointX="10.5" PointY="24.375" />
+        <EntityTypeShape EntityType="CertelModel.Hito" Width="1.5" PointX="15" PointY="17.875" />
+        <EntityTypeShape EntityType="CertelModel.Moneda" Width="1.5" PointX="10.5" PointY="26.75" />
+        <EntityTypeShape EntityType="CertelModel.Producto" Width="1.5" PointX="15.75" PointY="22" />
+        <EntityTypeShape EntityType="CertelModel.TipoHito" Width="1.5" PointX="12.75" PointY="27.125" />
+        <EntityTypeShape EntityType="CertelModel.TipoOperacion" Width="1.5" PointX="13.375" PointY="12.75" />
+        <AssociationConnector Association="CertelModel.FK__TipoHito__Estado__51300E55" />
+        <AssociationConnector Association="CertelModel.FK__Hito__TipoHitoId__531856C7" />
+        <AssociationConnector Association="CertelModel.FK_Producto_Moneda" />
+        <EntityTypeShape EntityType="CertelModel.Marca" Width="1.5" PointX="14.375" PointY="1.125" />
+        <EntityTypeShape EntityType="CertelModel.TipoGasto" Width="1.5" PointX="15.75" PointY="11.875" />
+        <EntityTypeShape EntityType="CertelModel.Settings" Width="1.5" PointX="13.375" PointY="6.75" />
+        <EntityTypeShape EntityType="CertelModel.ListaPrecio" Width="1.5" PointX="15.375" PointY="4.125" />
+        <EntityTypeShape EntityType="CertelModel.Ciudad" Width="1.5" PointX="15.75" PointY="9" />
+        <EntityTypeShape EntityType="CertelModel.ListaPrecioCostosLogisticos" Width="1.5" PointX="18" PointY="11.625" />
+        <AssociationConnector Association="CertelModel.FK__ListaPrec__Ciuda__251C81ED" />
+        <AssociationConnector Association="CertelModel.FK__ListaPrec__TipoG__2610A626" />
+        <AssociationConnector Association="CertelModel.FK__ListaPrec__TipoE__27F8EE98" />
+        <AssociationConnector Association="CertelModel.FK__ListaPrec__Produ__28ED12D1" />
+        <EntityTypeShape EntityType="CertelModel.ArchivoCotizacion" Width="1.5" PointX="18" PointY="23.5" />
+        <AssociationConnector Association="CertelModel.FK__ArchivosC__idArc__2CBDA3B51" />
+        <AssociationConnector Association="CertelModel.FK__ArchivosC__idCot__2BC97F7C1" />
+        <EntityTypeShape EntityType="CertelModel.Cotizacion" Width="1.5" PointX="18" PointY="14.5" />
+        <EntityTypeShape EntityType="CertelModel.GastoOperacional" Width="1.5" PointX="20.25" PointY="15.75" />
+        <EntityTypeShape EntityType="CertelModel.ItemCotizacion" Width="1.5" PointX="20.25" PointY="19.25" />
+        <AssociationConnector Association="CertelModel.FK__ArchivosC__idCot__2BC97F7C" />
+        <AssociationConnector Association="CertelModel.FK__Cotizacio__Ciuda__2704CA5F" />
+        <AssociationConnector Association="CertelModel.FK_Cotizacion_Cliente" />
+        <AssociationConnector Association="CertelModel.FK__Cotizacio__Usuar__3A4CA8FD" />
+        <AssociationConnector Association="CertelModel.FK__Cotizacio__Vende__7B264821" />
+        <AssociationConnector Association="CertelModel.FK__GastoOper__Cotiz__1E6F845E" />
+        <AssociationConnector Association="CertelModel.FK__Hito__Cotizacion__540C7B00" />
+        <AssociationConnector Association="CertelModel.FK__Servicio__Cotiza__0697FACD" />
+        <AssociationConnector Association="CertelModel.FK_Cotizacion_EstadoCotizacion" />
+        <AssociationConnector Association="CertelModel.FK_Cotizacion_FormaDePago" />
+        <AssociationConnector Association="CertelModel.FK_Cotizacion_Moneda" />
+        <AssociationConnector Association="CertelModel.FK_DescuentosRecargos_Cotizacion" />
+        <AssociationConnector Association="CertelModel.FK_ItemCotizacion_Cotizacion" />
+        <AssociationConnector Association="CertelModel.FK__GastoOper__TipoG__1D7B6025" />
+        <AssociationConnector Association="CertelModel.FK_ItemCotizacion_Producto" />
+        <EntityTypeShape EntityType="CertelModel.Archivos" Width="1.5" PointX="17.375" PointY="1" />
+        <AssociationConnector Association="CertelModel.FK__ArchivosC__idArc__2CBDA3B5" />
+        <AssociationConnector Association="CertelModel.FK__ItemCotiz__Apara__65F62111" />
+        <AssociationConnector Association="CertelModel.FK__ItemCotiz__Apara__67DE6983" />
+        <AssociationConnector Association="CertelModel.FK__ItemCotiz__Apara__69C6B1F5" />
+        <AssociationConnector Association="CertelModel.FK__ItemCotiz__Marca__6CA31EA0" />
+        <AssociationConnector Association="CertelModel.FK__ItemCotiz__TipoF__6ABAD62E" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

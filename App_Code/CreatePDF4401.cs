@@ -32,23 +32,23 @@ public class CreatePDF4401
         FileName = "Inspeccion IT " + Inspeccion.IT.Replace('/', '-') + ".pdf";
         document = new Document();
         document.Info.Title = "Inspección";
-        document.DefaultPageSetup.TopMargin = "7cm";
+        document.DefaultPageSetup.TopMargin = "1cm";
         document.DefaultPageSetup.LeftMargin = "2cm";
         document.DefaultPageSetup.RightMargin = "2cm";
         DefineStyles(document);
         DefineCover(document);
-        CreateVineta();
-        DefineContentSection(document);
+       // CreateVineta();
+        //DefineContentSection(document);
         BreveIntroAndAlcance();
-        Referencias();
+        //Referencias();
         Antecedentes();
-        ImagenCabina();
+        //ImagenCabina();
         TerminosYDefiniciones();
         ResultadosInspeccion();
         ObservacionesNormativasYTecnicas();
         Conclusiones();
         
-        DefineTableOfContents(document);
+        //DefineTableOfContents(document);
         Rendered = Rendering();
     }
     public static void DefineStyles(Document document)
@@ -137,21 +137,22 @@ public class CreatePDF4401
         parr.Format.Alignment = ParagraphAlignment.Center;
         parr.Format.SpaceBefore = "5cm";
         Image image = section.LastParagraph.AddImage(pathImage + "/logo.png");
-        image.Width = "6cm";
-        paragraph = section.AddParagraph(string.Format("INFORME DE AUDITORÍA E INSPECCIÓN DEL {0}", Inspeccion.Aparato.Nombre.ToUpper()));
+        image.Width = "10cm";
+        paragraph = section.AddParagraph(string.Format("INFORME DE AUDITORÍA TÉCNICA E INSPECCIÓN DEL {0}", Inspeccion.Aparato.Nombre.ToUpper()));
         paragraph.Format.Font.Size = 16;
         paragraph.Format.Alignment = ParagraphAlignment.Center;
         paragraph.Format.Font.Color = Colors.Black;
         paragraph.Format.Font.Bold = true;
         paragraph.Format.SpaceBefore = "2cm";
 
-        paragraph = section.AddParagraph(string.Format("IT N° {0}", Inspeccion.IT));
+        var cliente = Inspeccion.Servicio.Cliente.Nombre;
+        paragraph = section.AddParagraph(cliente);
         paragraph.Format.Font.Size = 12;
         paragraph.Format.Font.Bold = false;
         paragraph.Format.SpaceAfter = "1cm";
         paragraph.Format.Alignment = ParagraphAlignment.Center;
 
-        paragraph = section.AddParagraph(string.Format("INFORME FASE {0} {1} N° {2}", ToRoman(Inspeccion.Fase), Inspeccion.Aparato.Nombre, Inspeccion.Numero));
+        paragraph = section.AddParagraph(Inspeccion.Ubicacion);
         paragraph.Format.Font.Size = 12;
         paragraph.Format.Font.Bold = false;
         paragraph.Format.SpaceAfter = "0.5cm";
@@ -163,7 +164,7 @@ public class CreatePDF4401
         paragraph.Format.SpaceAfter = "0.5cm";
         paragraph.Format.Alignment = ParagraphAlignment.Center;
 
-        paragraph = section.AddParagraph(string.Format("Fecha de Inspección {0}", Inspeccion.FechaInspeccion.Value.ToString("dd-MM-yyyy")));
+        paragraph = section.AddParagraph(Inspeccion.Numero ?? string.Empty);
         paragraph.Format.Font.Size = 11;
         paragraph.Format.Font.Bold = false;
         paragraph.Format.SpaceAfter = "7cm";
@@ -211,7 +212,7 @@ public class CreatePDF4401
         row = table.AddRow();
         row.Cells[0].AddParagraph(string.Format("CARGO: {0} \n {1} {2}", Inspeccion.Usuario.Cargo, Inspeccion.Usuario.Nombre, Inspeccion.Usuario.Apellido));
         row.Cells[1].AddParagraph("Unidad Inspección de Especialidades y Transporte Vertical");
-        row.Cells[2].AddParagraph(string.Format("CARGO: {0}", Inspeccion.Aprobador == null ? string.Empty : Inspeccion.Usuario1.Cargo));
+        row.Cells[2].AddParagraph(string.Format("{0} - {1}", Inspeccion.Aprobador == null ? string.Empty : Inspeccion.Usuario1.Cargo, Inspeccion.Aprobador == null ? string.Empty : Inspeccion.Usuario1.Nombre + " " + Inspeccion.Usuario1.Apellido));
         row.Cells[3].AddParagraph(Inspeccion.Destinatario ?? string.Empty);
 
         row = table.AddRow();
