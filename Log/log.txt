@@ -1862,3 +1862,12 @@ Nombre del parámetro: text
    en CreatePDFD114.Conclusiones() en \\mac\home\Desktop\OneDrive-2018-06-24\certasc\App_Code\CreatePDFD114.cs:línea 1314
    en CreatePDFD114..ctor(Inspeccion inspeccion) en \\mac\home\Desktop\OneDrive-2018-06-24\certasc\App_Code\CreatePDFD114.cs:línea 49
    en SetInforme.CreatePdf(HttpContext post) en \\mac\home\Desktop\OneDrive-2018-06-24\certasc\handlers\SetInforme.ashx:línea 176
+
+ ERROR 
+ 04-Jul-2018 11:18:41 PM 
+ SetInforme/Plantilla 
+ System.ArgumentException: 'scm' is an unknown unit type.
+   en MigraDoc.DocumentObjectModel.Unit.op_Implicit(String value)
+   en CreatePDFD116.Resumen() en \\mac\home\Desktop\OneDrive-2018-06-24\certasc\App_Code\CreatePDFD116.cs:línea 1206
+   en CreatePDFD116..ctor(Inspeccion inspeccion) en \\mac\home\Desktop\OneDrive-2018-06-24\certasc\App_Code\CreatePDFD116.cs:línea 42
+   en SetInforme.CreatePdf(HttpContext post) en \\mac\home\Desktop\OneDrive-2018-06-24\certasc\handlers\SetInforme.ashx:línea 184
