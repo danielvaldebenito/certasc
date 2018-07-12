@@ -170,41 +170,16 @@ public class SetInforme : IHttpHandler, IRequiresSessionState {
                     return new { done = false, message = "Asegúrese de llenar previamente el check-list correspondiente" };
                 db.Database.CommandTimeout = 300;
                 var path = string.Empty;
-                switch(inspeccion.TipoInformeID)
+                var principalNorma = inspeccion.InspeccionNorma.Where(w => !w.Norma.NormasAsociadas1.Any()).FirstOrDefault();
+                if (principalNorma == null)
                 {
-                    case 1:
-                        var pdf = new CreatePDFD114(inspeccion);
-                        path = pdf.Rendered;
-                        break;
-                    case 2:
-                        var pdf2 = new CreatePDF4401(inspeccion);
-                        path = pdf2.Rendered;
-                        break;
-                    case 3:
-                        var pdf3 = new CreatePDFD116(inspeccion);
-                        path = pdf3.Rendered;
-                        break;
-                    case 4:
-                        var pdf4 = new CreatePDFD115(inspeccion);
-                        path = pdf4.Rendered;
-                        break;
-                    case 5:
-                        var pdf5 = new CreatePDFD112(inspeccion);
-                        path = pdf5.Rendered;
-                        break;
-                    case 6:
-                        var pdf6 = new CreatePDFD118(inspeccion);
-                        path = pdf6.Rendered;
-                        break;
-                    case null:
-                        path = "";
-                        return new { done = false, message = "No ha especificado el tipo de informe que desea generar" };
-
-                    default: return new { done = false, message = "Tipo de informe aún no ha sido creado" };
-
+                    return new { done = false, message = "La inspección no tiene normas asociadas" };
                 }
+
+                var pdf = new CreatePdfInforme(inspeccion, (int) principalNorma.NormaID, principalNorma.Norma.Nombre, (int)inspeccion.TipoInformeID);
+                path = pdf.Rendered;
                 RemovePdfs();
-                return new { done = true, message = "Informe generado exitosamente", path = path };;
+                return new { done = true, message = "Informe generado exitosamente", path };
 
             }
         }

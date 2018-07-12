@@ -45,9 +45,9 @@ public class Login : IHttpHandler, IRequiresSessionState
             }
 
         }
-        catch (System.Data.Entity.Core.EntityException)
+        catch (System.Data.Entity.Core.EntityException ex)
         {
-            data = new { done = false, message = "Está sin conexión, inténtelo más tarde" };
+            data = new { done = false, message = "Está sin conexión, inténtelo más tarde", ex = ex.ToString() };
         }
         catch (Exception ex)
         {

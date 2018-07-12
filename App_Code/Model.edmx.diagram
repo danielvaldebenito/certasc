@@ -4,136 +4,131 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="772cbae2855b4027a41df7563600f4c4" Name="Diagram1" ZoomLevel="81">
-        <EntityTypeShape EntityType="CertelModel.Aparato" Width="1.5" PointX="3.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Caracteristica" Width="1.5" PointX="6" PointY="27" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Cliente" Width="1.5" PointX="1.5" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Cumplimiento" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.EquipoUtilizado" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Especificos" Width="1.5" PointX="9" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.EstadoInspeccion" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.EstadoServicio" Width="1.5" PointX="1.5" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.EstructuraInfome" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Evaluacion" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.FormatoNorma" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.MenuAcceso" Width="1.5" PointX="11" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.MenuModulo" Width="1.5" PointX="8.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Norma" Width="1.5" PointX="1.5" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Pda" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Requisito" Width="1.5" PointX="3.75" PointY="27" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Rol" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Servicio" Width="1.5" PointX="3.75" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.TerminosYDefiniciones" Width="1.5" PointX="9.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.TipoFuncionamientoAparato" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.TipoNorma" Width="1.5" PointX="3.75" PointY="34" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Titulo" Width="1.5" PointX="1.5" PointY="27.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.Usuario" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.UsuarioRol" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CertelModel.ValoresEspecificos" Width="1.5" PointX="11.25" PointY="8.25" IsExpanded="true" />
-        <AssociationConnector Association="CertelModel.FK_Caracteristica_Requisito" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_Cumplimiento_Caracteristica" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_Servicio_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_Cumplimiento_GlosarioCumplimiento1" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_EquipoUtilizado_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK__ValoresEs__Espec__2704CA5F" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_Servicio_EstadoServicio" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_MenuAcceso_MenuModulo" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_MenuAcceso_Rol" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_MenuModulo_MenuModulo" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_Titulo_Norma" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_Pda_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_Requisito_Titulo" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_UsuarioRol_Rol" ManuallyRouted="false" />
-        <AssociationConnector Association="CertelModel.FK_UsuarioRol_Usuario" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CertelModel.InspeccionNorma" Width="1.5" PointX="11.375" PointY="4.75" />
-        <AssociationConnector Association="CertelModel.FK__Inspeccio__Norma__2DB1C7EE" />
-        <EntityTypeShape EntityType="CertelModel.Fotografias" Width="1.5" PointX="10.5" PointY="15.625" />
-        <AssociationConnector Association="CertelModel.FK__Fotografi__Cumpl__41B8C09B" />
-        <EntityTypeShape EntityType="CertelModel.ActualizacionesPendientes" Width="1.5" PointX="8.25" PointY="21.75" />
-        <AssociationConnector Association="CertelModel.FK__Actualiza__Carac__4F7CD00D" />
-        <AssociationConnector Association="CertelModel.FK__Actualiza__PdaID__5070F446" />
-        <EntityTypeShape EntityType="CertelModel.CustomInforme" Width="1.5" PointX="12.375" PointY="0.75" />
-        <AssociationConnector Association="CertelModel.FK__CustomInf__Estru__59FA5E80" />
-        <EntityTypeShape EntityType="CertelModel.Informe" Width="1.5" PointX="8.25" PointY="15.5" />
-        <EntityTypeShape EntityType="CertelModel.Inspeccion" Width="1.5" PointX="6" PointY="4.625" />
-        <AssociationConnector Association="CertelModel.FK_Inspeccion_TipoTransporte" />
-        <AssociationConnector Association="CertelModel.FK_Cumplimiento_Inspeccion" />
-        <AssociationConnector Association="CertelModel.FK__CustomInf__Inspe__5629CD9C" />
-        <AssociationConnector Association="CertelModel.FK_Inspeccion_EstadoInspeccion" />
-        <AssociationConnector Association="CertelModel.FK__Informe__Inspecc__5DCAEF64" />
-        <AssociationConnector Association="CertelModel.FK__Inspeccio__Inspe__534D60F1" />
-        <AssociationConnector Association="CertelModel.FK__ValoresEs__Inspe__4CA06362" />
-        <AssociationConnector Association="CertelModel.FK_Inspeccion_Servicio" />
-        <AssociationConnector Association="CertelModel.FK_Inspeccion_TipoFuncionamientoTransporte" />
-        <AssociationConnector Association="CertelModel.FK_Inspeccion_Usuario" />
-        <AssociationConnector Association="CertelModel.FK__Inspeccio__Aprob__6D0D32F4" />
-        <AssociationConnector Association="CertelModel.FK__Inspeccio__Revis__6C190EBB" />
-        <EntityTypeShape EntityType="CertelModel.ObservacionTecnica" Width="1.5" PointX="8.25" PointY="19" />
-        <AssociationConnector Association="CertelModel.FK__Observaci__Inspe__70DDC3D8" />
-        <EntityTypeShape EntityType="CertelModel.TipoInforme" Width="1.5" PointX="6.375" PointY="0.75" />
-        <AssociationConnector Association="CertelModel.FK__Inspeccio__TipoI__73BA3083" />
-        <AssociationConnector Association="CertelModel.FK__Norma__TipoInfor__74AE54BC" />
-        <AssociationConnector Association="CertelModel.FK__Inspeccio__Inspe__75A278F5" />
-        <EntityTypeShape EntityType="CertelModel.DestinoProyecto" Width="1.5" PointX="13.375" PointY="3.875" />
-        <AssociationConnector Association="CertelModel.FK__Inspeccio__Desti__797309D9" />
-        <EntityTypeShape EntityType="CertelModel.FotografiaTecnica" Width="1.5" PointX="10.5" PointY="19.125" />
-        <AssociationConnector Association="CertelModel.FK__Fotografi__Obser__7C4F7684" />
-        <AssociationConnector Association="CertelModel.FK__TerminosY__Norma__7D439ABD" />
-        <EntityTypeShape EntityType="CertelModel.NormasAsociadas" Width="1.5" PointX="3.75" PointY="31" />
-        <AssociationConnector Association="CertelModel.FK__NormasAso__Norma__03F0984C" />
-        <AssociationConnector Association="CertelModel.FK__NormasAso__Norma__04E4BC85" />
-        <AssociationConnector Association="CertelModel.FK_Norma_TipoNorma" />
-        <EntityTypeShape EntityType="CertelModel.DescuentosRecargos" Width="1.5" PointX="15" PointY="27.75" />
-        <EntityTypeShape EntityType="CertelModel.DescuentosYRecargos" Width="1.5" PointX="13.375" PointY="9.75" />
-        <EntityTypeShape EntityType="CertelModel.EstadoCotizacion" Width="1.5" PointX="10.5" PointY="21.875" />
-        <EntityTypeShape EntityType="CertelModel.FormaDePago" Width="1.5" PointX="10.5" PointY="24.375" />
-        <EntityTypeShape EntityType="CertelModel.Hito" Width="1.5" PointX="15" PointY="17.875" />
-        <EntityTypeShape EntityType="CertelModel.Moneda" Width="1.5" PointX="10.5" PointY="26.75" />
-        <EntityTypeShape EntityType="CertelModel.Producto" Width="1.5" PointX="15.75" PointY="22" />
-        <EntityTypeShape EntityType="CertelModel.TipoHito" Width="1.5" PointX="12.75" PointY="27.125" />
-        <EntityTypeShape EntityType="CertelModel.TipoOperacion" Width="1.5" PointX="13.375" PointY="12.75" />
-        <AssociationConnector Association="CertelModel.FK__TipoHito__Estado__51300E55" />
-        <AssociationConnector Association="CertelModel.FK__Hito__TipoHitoId__531856C7" />
-        <AssociationConnector Association="CertelModel.FK_Producto_Moneda" />
-        <EntityTypeShape EntityType="CertelModel.Marca" Width="1.5" PointX="14.375" PointY="1.125" />
-        <EntityTypeShape EntityType="CertelModel.TipoGasto" Width="1.5" PointX="15.75" PointY="11.875" />
-        <EntityTypeShape EntityType="CertelModel.Settings" Width="1.5" PointX="13.375" PointY="6.75" />
-        <EntityTypeShape EntityType="CertelModel.ListaPrecio" Width="1.5" PointX="15.375" PointY="4.125" />
-        <EntityTypeShape EntityType="CertelModel.Ciudad" Width="1.5" PointX="15.75" PointY="9" />
-        <EntityTypeShape EntityType="CertelModel.ListaPrecioCostosLogisticos" Width="1.5" PointX="18" PointY="11.625" />
-        <AssociationConnector Association="CertelModel.FK__ListaPrec__Ciuda__251C81ED" />
-        <AssociationConnector Association="CertelModel.FK__ListaPrec__TipoG__2610A626" />
-        <AssociationConnector Association="CertelModel.FK__ListaPrec__TipoE__27F8EE98" />
-        <AssociationConnector Association="CertelModel.FK__ListaPrec__Produ__28ED12D1" />
-        <EntityTypeShape EntityType="CertelModel.ArchivoCotizacion" Width="1.5" PointX="18" PointY="23.5" />
-        <AssociationConnector Association="CertelModel.FK__ArchivosC__idArc__2CBDA3B51" />
-        <AssociationConnector Association="CertelModel.FK__ArchivosC__idCot__2BC97F7C1" />
-        <EntityTypeShape EntityType="CertelModel.Cotizacion" Width="1.5" PointX="18" PointY="14.5" />
-        <EntityTypeShape EntityType="CertelModel.GastoOperacional" Width="1.5" PointX="20.25" PointY="15.75" />
-        <EntityTypeShape EntityType="CertelModel.ItemCotizacion" Width="1.5" PointX="20.25" PointY="19.25" />
-        <AssociationConnector Association="CertelModel.FK__ArchivosC__idCot__2BC97F7C" />
-        <AssociationConnector Association="CertelModel.FK__Cotizacio__Ciuda__2704CA5F" />
-        <AssociationConnector Association="CertelModel.FK_Cotizacion_Cliente" />
-        <AssociationConnector Association="CertelModel.FK__Cotizacio__Usuar__3A4CA8FD" />
-        <AssociationConnector Association="CertelModel.FK__Cotizacio__Vende__7B264821" />
-        <AssociationConnector Association="CertelModel.FK__GastoOper__Cotiz__1E6F845E" />
-        <AssociationConnector Association="CertelModel.FK__Hito__Cotizacion__540C7B00" />
-        <AssociationConnector Association="CertelModel.FK__Servicio__Cotiza__0697FACD" />
-        <AssociationConnector Association="CertelModel.FK_Cotizacion_EstadoCotizacion" />
-        <AssociationConnector Association="CertelModel.FK_Cotizacion_FormaDePago" />
-        <AssociationConnector Association="CertelModel.FK_Cotizacion_Moneda" />
-        <AssociationConnector Association="CertelModel.FK_DescuentosRecargos_Cotizacion" />
-        <AssociationConnector Association="CertelModel.FK_ItemCotizacion_Cotizacion" />
-        <AssociationConnector Association="CertelModel.FK__GastoOper__TipoG__1D7B6025" />
-        <AssociationConnector Association="CertelModel.FK_ItemCotizacion_Producto" />
-        <EntityTypeShape EntityType="CertelModel.Archivos" Width="1.5" PointX="17.375" PointY="1" />
-        <AssociationConnector Association="CertelModel.FK__ArchivosC__idArc__2CBDA3B5" />
-        <AssociationConnector Association="CertelModel.FK__ItemCotiz__Apara__65F62111" />
-        <AssociationConnector Association="CertelModel.FK__ItemCotiz__Apara__67DE6983" />
-        <AssociationConnector Association="CertelModel.FK__ItemCotiz__Apara__69C6B1F5" />
-        <AssociationConnector Association="CertelModel.FK__ItemCotiz__Marca__6CA31EA0" />
-        <AssociationConnector Association="CertelModel.FK__ItemCotiz__TipoF__6ABAD62E" />
-        </Diagram>
+      <Diagram DiagramId="03472915b0a941938e1b86acbf311a7a" Name="Diagram1">
+        <EntityTypeShape EntityType="certascModel.ActualizacionesPendientes" Width="1.5" PointX="5.25" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Aparato" Width="1.5" PointX="9" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.ArchivoCotizacion" Width="1.5" PointX="8.25" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Archivos" Width="1.5" PointX="6" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Caracteristica" Width="1.5" PointX="9" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Ciudad" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Cliente" Width="1.5" PointX="0.75" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Cotizacion" Width="1.5" PointX="3" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Cumplimiento" Width="1.5" PointX="11.25" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.CustomInforme" Width="1.5" PointX="8.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.DescuentosRecargos" Width="1.5" PointX="5.25" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.DescuentosYRecargos" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.DestinoProyecto" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.EquipoUtilizado" Width="1.5" PointX="3" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Especificos" Width="1.5" PointX="12" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.EstadoCotizacion" Width="1.5" PointX="0.75" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.EstadoInspeccion" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.EstadoServicio" Width="1.5" PointX="1.5" PointY="41.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.EstructuraInfome" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Evaluacion" Width="1.5" PointX="9" PointY="45.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.FormaDePago" Width="1.5" PointX="0.75" PointY="35.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.FormatoNorma" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Fotografias" Width="1.5" PointX="13.5" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.FotografiaTecnica" Width="1.5" PointX="10.5" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.GastoOperacional" Width="1.5" PointX="8.25" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Hito" Width="1.5" PointX="11.25" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Informe" Width="1.5" PointX="8.25" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Inspeccion" Width="1.5" PointX="6" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.InspeccionNorma" Width="1.5" PointX="14.25" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.ItemCotizacion" Width="1.5" PointX="11.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.ListaPrecio" Width="1.5" PointX="14.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.ListaPrecioCostosLogisticos" Width="1.5" PointX="11.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Marca" Width="1.5" PointX="9" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.MenuAcceso" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.MenuModulo" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Moneda" Width="1.5" PointX="0.75" PointY="38.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Norma" Width="1.5" PointX="12" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.NormasAsociadas" Width="1.5" PointX="14.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.ObservacionTecnica" Width="1.5" PointX="8.25" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Pda" Width="1.5" PointX="3" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Producto" Width="1.5" PointX="9" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Requisito" Width="1.5" PointX="6.75" PointY="48.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Rol" Width="1.5" PointX="0.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Servicio" Width="1.5" PointX="3.75" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Settings" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.TerminosYDefiniciones" Width="1.5" PointX="14.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.TipoFuncionamientoAparato" Width="1.5" PointX="9" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.TipoGasto" Width="1.5" PointX="6" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.TipoHito" Width="1.5" PointX="9" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.TipoInforme" Width="1.5" PointX="3.75" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.TipoNorma" Width="1.5" PointX="9.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Titulo" Width="1.5" PointX="4.5" PointY="49" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.Usuario" Width="1.5" PointX="0.75" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.UsuarioRol" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="certascModel.ValoresEspecificos" Width="1.5" PointX="14.25" PointY="21.25" IsExpanded="true" />
+        <AssociationConnector Association="certascModel.FK__Actualiza__Carac__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Actualiza__PdaID__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ItemCotiz__Apara__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ListaPrec__TipoE__2180FB33" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Inspeccion_TipoTransporte" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ArchivosC__idArc__2CBDA3B5" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ArchivosC__idCot__2BC97F7C" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Caracteristica_Requisito" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Cumplimiento_Caracteristica" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Cotizacio__Ciuda__2704CA5F" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ListaPrec__Ciuda__22751F6C" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Cotizacion_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Servicio_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Cotizacio__Usuar__3A4CA8FD" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Cotizacio__Vende__7B264821" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__GastoOper__Cotiz__1E6F845E" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Hito__Cotizacion__540C7B00" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Cotizacion_EstadoCotizacion" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Cotizacion_FormaDePago" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Cotizacion_Moneda" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_DescuentosRecargos_Cotizacion" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_ItemCotizacion_Cotizacion" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Fotografi__Cumpl__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Cumplimiento_GlosarioCumplimiento1" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Cumplimiento_Inspeccion" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__CustomInf__Estru__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__CustomInf__Inspe__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Inspeccio__Desti__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_EquipoUtilizado_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ValoresEs__Espec__3587F3E0" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__TipoHito__Estado__31B762FC" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Inspeccion_EstadoInspeccion" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Servicio_EstadoServicio" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Fotografi__Obser__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__GastoOper__TipoG__1D7B6025" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Hito__TipoHitoId__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Informe__Inspecc__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Inspeccio__Aprob__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Inspeccio__Inspe__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Inspeccio__Inspe__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Inspeccio__Revis__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Inspeccio__TipoI__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Observaci__Inspe__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ValoresEs__Inspe__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Inspeccion_Servicio" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Inspeccion_TipoFuncionamientoTransporte" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Inspeccion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Inspeccio__Norma__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ItemCotiz__Marca__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ItemCotiz__TipoF__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_ItemCotizacion_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ListaPrec__Produ__208CD6FA" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__ListaPrec__TipoG__236943A5" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_MenuAcceso_MenuModulo" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_MenuAcceso_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_MenuModulo_MenuModulo" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Producto_Moneda" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Norma__TipoInfor__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__NormasAso__Norma__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__NormasAso__Norma__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__TerminosY__Norma__30C33EC3" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Norma_TipoNorma" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Titulo_Norma" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Pda_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_Requisito_Titulo" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_UsuarioRol_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK_UsuarioRol_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="certascModel.FK__Servicio__Cotiza__3A4CA8FD" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
